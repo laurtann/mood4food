@@ -21,6 +21,36 @@
 
   <body>
     <%- include('partials/_header') %>
-    <h1>Hello World!</h1>
+    <!-- profile header displays name and picture -->
+    <header>
+      <div>
+        <img src="/midterm/mood4food/public/images/restaurant_img.png" class="img-fluid" alt="restaurant logo">
+      </div>
+      <br />
+      <div>
+        <h2>Restaurant Name</h2>
+      </div>
+    </header>
+
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+      <section class="new-tweet">
+
+          <label for="tweet-text">What are you humming about?</label>
+          <textarea name="text" id="tweet-text"></textarea>
+          <div class="form-footer">
+            <button type="submit" id="submit-tweet">Tweet</button>
+            <output name="counter" class="counter" for="tweet-text">140</output>
+          </div>
+
+      </section>
+      <!-- tweet container -->
+      <section id="tweets-container"></section>
+      <button id="topButton" title="Go to top">&#8679;</button>
+    </main>
+  </body>
+
+  <footer></footer>
+
   </body>
 </html>
