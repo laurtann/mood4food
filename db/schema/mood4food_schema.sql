@@ -8,20 +8,20 @@ CREATE TABLE users (
   last_name VARCHAR(255) NOT NULL,
   phone_num VARCHAR(32) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  password varchar(255) NOT NULL
+  password VARCHAR(255) NOT NULL
 )
 
 CREATE TABLE food_items (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  cost integer NOT NULL,
-  description text NOT NULL,
-  in_stock bolean NOT NULL,
-  food_photo_url varchar(255) NOT NULL
+  cost INTEGER NOT NULL,
+  description TEXT NOT NULL,
+  in_stock BOOLEAN NOT NULL,
+  food_photo_url VARCHAR(255) NOT NULL
 )
 
 CREATE TABLE orders(
 	id SERIAL PRIMARY KEY NOT NULL,
 	user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-	food_id integer NOT NULL REFERENCES food_items(id) ON DELETE CASCADE
+	food_id INTEGER NOT NULL REFERENCES food_items(id) ON DELETE CASCADE
 )
