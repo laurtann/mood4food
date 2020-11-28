@@ -17,7 +17,7 @@ CREATE TABLE food_items (
   cost INTEGER NOT NULL,
   description TEXT NOT NULL,
   in_stock BOOLEAN NOT NULL,
-  food_photo_url VARCHAR(255) NOT NULL
+  food_photo_url TEXT NOT NULL
 );
 
 CREATE TABLE orders(
