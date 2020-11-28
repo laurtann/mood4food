@@ -1,3 +1,41 @@
--- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
+-- SEEDS FOR USERS
+-- PASSWORD IS 'password' hashed
+
+insert into users (id, first_name, last_name, phone_num, email, password) values (1, 'Chloette', 'Driuzzi', '126-169-5920', 'cdriuzzi0@issuu.com', 'z2ai100FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (2, 'Liza', 'Cotterell', '913-631-3762', 'lcotterell1@mashable.com', 'z2aq10tFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (3, 'Lynnette', 'Bentsen', '237-673-7107', 'lbentsen2@ameblo.jp', '22aq10pFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (4, 'Jennifer', 'Paolozzi', '679-650-2225', 'jpaolozzi3@sciencedirect.com', '32aw10iFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (5, 'Martainn', 'Manuele', '427-495-4129', 'mmanuele4@redcross.org', 'i2ae10jFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (6, 'Carlo', 'Gashion', '470-391-3363', 'cgashion5@sakura.ne.jp', 'j2aj10gFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (7, 'Allayne', 'Millican', '594-575-9360', 'amillican6@woothemes.com', 'l2a010tFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (8, 'Alvy', 'Plenty', '959-329-7930', 'aplenty7@hugedomains.com', '82ay103FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (9, 'Margaret', 'Claussen', '967-693-6787', 'mclaussen8@earthlink.net', 'l2am10fFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (10, 'Kathryne', 'Itzhaiek', '339-519-3543', 'kitzhaiek9@hao123.com', 'a2ap10vFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (11, 'Lockwood', 'Raymont', '890-264-8171', 'lraymonta@indiatimes.com', 'z2a010eFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (12, 'Lek', 'Lidstone', '301-628-0134', 'llidstoneb@huffingtonpost.com', 'q2a2105FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (13, 'Denys', 'Johnke', '385-291-5423', 'djohnkec@va.gov', '42ab10bFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (14, 'Filberte', 'Vasilischev', '807-797-7249', 'fvasilischevd@vk.com', 'j2az10vFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (15, 'Rafaelita', 'Chantillon', '475-266-0555', 'rchantillone@amazon.co.jp', 'b2a110dFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (16, 'Rivi', 'Echelle', '342-671-5629', 'rechellef@china.com.cn', '52aq10eFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (17, 'Laurena', 'Kupis', '620-814-1657', 'lkupisg@cargocollective.com', 'w2ab10qFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (18, 'Bobine', 'Butchard', '303-362-1996', 'bbutchardh@elegantthemes.com', 't2aq10kFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (19, 'Goldia', 'Etienne', '978-134-1043', 'getiennei@4shared.com', 'j2ao10vFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (20, 'Moise', 'Wilbore', '221-333-9088', 'mwilborej@ask.com', 'f2aw10lFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (21, 'Karole', 'Duffet', '198-395-7312', 'kduffetk@sciencedaily.com', '52a310mFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (22, 'Alexio', 'Schutt', '716-122-7483', 'aschuttl@cam.ac.uk', 'x2a2103FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (23, 'Lia', 'Petrina', '990-965-3468', 'lpetrinam@apple.com', 'u2a0102FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (24, 'Tawnya', 'Brooksbie', '160-470-1984', 'tbrooksbien@github.io', '22a410uFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (25, 'Ema', 'Meconi', '238-457-6751', 'emeconio@networksolutions.com', '72a710tFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (26, 'Hinda', 'Rounsivall', '481-155-1535', 'hrounsivallp@exblog.jp', 'i2at10cFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (27, 'Myrwyn', 'Diggell', '691-885-0710', 'mdiggellq@earthlink.net', '02aw10vFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (28, 'Jannelle', 'Davley', '497-910-4664', 'jdavleyr@deliciousdays.com', '62as104FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (29, 'Branden', 'Stonehewer', '414-521-2602', 'bstonehewers@simplemachines.org', 's2av10aFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (30, 'Edsel', 'Whitely', '725-915-9693', 'ewhitelyt@csmonitor.com', 'm2av106FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (31, 'Annetta', 'McGilvray', '401-290-1433', 'amcgilvrayu@gnu.org', 'p2ar10gFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (32, 'Daryn', 'Woehler', '737-996-1068', 'dwoehlerv@indiatimes.com', 'e2af10gFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (33, 'Maryanna', 'Breissan', '602-406-4697', 'mbreissanw@comsenz.com', 't2ap10uFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (34, 'Merv', 'Furse', '691-156-1540', 'mfursex@networkadvertising.org', 'c2at108FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (35, 'Channa', 'Jeayes', '269-459-2888', 'cjeayesy@zdnet.com', 'm2a410kFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (36, 'Leia', 'Bohlin', '448-622-1244', 'lbohlinz@joomla.org', '92am104FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (37, 'Dicky', 'Sclanders', '530-336-0264', 'dsclanders10@jimdo.com', 'p2as10tFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+insert into users (id, first_name, last_name, phone_num, email, password) values (38, 'Pammie', 'Sidebotham', '419-705-0539', 'psidebotham11@arizona.edu', 'f2af10sFB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
