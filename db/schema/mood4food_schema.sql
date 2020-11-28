@@ -9,7 +9,7 @@ CREATE TABLE users (
   phone_num VARCHAR(32) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
-)
+);
 
 CREATE TABLE food_items (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -18,10 +18,10 @@ CREATE TABLE food_items (
   description TEXT NOT NULL,
   in_stock BOOLEAN NOT NULL,
   food_photo_url VARCHAR(255) NOT NULL
-)
+);
 
 CREATE TABLE orders(
 	id SERIAL PRIMARY KEY NOT NULL,
 	user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 	food_id INTEGER NOT NULL REFERENCES food_items(id) ON DELETE CASCADE
-)
+);
