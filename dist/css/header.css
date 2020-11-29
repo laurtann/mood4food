@@ -1,0 +1,18 @@
+nav {
+  height: 120px;
+  background-color: #0f606b;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar-brand {
+  font-family: 'Comfortaa', cursive;
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+}
+/*# sourceMappingURL=header.css.map */

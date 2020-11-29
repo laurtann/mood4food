@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,GAAG,CAAC;EACF,MAAM,EAAE,KAAK;EACb,gBAAgB,EAAE,OAAO;EACzB,WAAW,EAAE,oBAAoB;CAClC;;AAED,AAAA,aAAa,CAAC;EACZ,WAAW,EAAE,oBAAoB;CAClC;;AAED,MAAM,EAAE,SAAS,EAAE,KAAK;EACtB,AAAA,iBAAiB,CAAC,gBAAgB,CAAC;IACjC,eAAe,EAAE,QAAQ;GAC1B",
+    "sources": [
+        "../../styles/header.scss"
+    ],
+    "names": [],
+    "file": "header.css"
+}

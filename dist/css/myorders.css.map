@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../../styles/myorders.scss"
+    ],
+    "names": [],
+    "file": "myorders.css"
+}
