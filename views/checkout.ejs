@@ -52,8 +52,7 @@
                         <th scope="col">Image</th>
                         <th scope="col">Cost</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Add to Cart</th>
+                        <th scope="col">Edit Cart</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -63,8 +62,7 @@
                         </th>
                         <td>$10.00</td>
                         <td>Hamburger</td>
-                        <td>Hamburger with lettuce, tomato and onion.</td>
-                        <td>
+                        <td class="edit-cart">
                           <button type="button" class="btn btn-success">+</button>
                           <button type="button" class="btn btn-success">-</button>
                           <button type="button" class="btn btn-success">x</button>
@@ -76,8 +74,7 @@
                         </th>
                         <td>$15.00</td>
                         <td>Pasta</td>
-                        <td>Spaghetti and meatballs.</td>
-                        <td>
+                        <td class="edit-cart">
                           <button type="button" class="btn btn-success">+</button>
                           <button type="button" class="btn btn-success">-</button>
                           <button type="button" class="btn btn-success">x</button>
@@ -89,8 +86,7 @@
                         </th>
                         <td>$8.00</td>
                         <td>Salad</td>
-                        <td>Green salad with vinagrette dressing.</td>
-                        <td>
+                        <td class="edit-cart">
                           <button type="button" class="btn btn-success">+</button>
                           <button type="button" class="btn btn-success">-</button>
                           <button type="button" class="btn btn-success">x</button>
@@ -105,9 +101,34 @@
           <div class="col">
             <section class="place-order">
               <h2>Place Your Order</h2>
-              <div></div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                  </tr>
+                </tbody>
+              </table>
               <form action="/myorders" method="post">
-                <button type="submit">Confirm</button>
+                <button type="submit" class="btn btn-success confirm">Confirm</button>
               </form>
             </section>
           </div>
