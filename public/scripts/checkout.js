@@ -1,23 +1,25 @@
-
-const valToString = (qty) => $("#qty").text(String(qty));
-
 $(document).ready(function() {
-  let quantityValue = parseInt($("#qty").text());
 
-  $("#plus").click(function() {
+  $(".plus").click(function() {
+    let quantity = $(this).parent().siblings(".qty");
+    let quantityValue = parseInt($(quantity).text());
     quantityValue += 1;
-    valToString(quantityValue);
+    $(quantity).text(String(quantityValue));
   });
 
-  $("#minus").click(function() {
+  $(".minus").click(function() {
+    let quantity = $(this).parent().siblings(".qty");
+    let quantityValue = parseInt($(quantity).text());
     if (quantityValue > 0) {
       quantityValue -= 1;
     }
-    valToString(quantityValue);
+    $(quantity).text(String(quantityValue));
   });
 
-  $("#remove").click(function() {
+  $(".remove").click(function() {
+    let quantity = $(this).parent().siblings(".qty");
+    let quantityValue = parseInt($(quantity).text());
     quantityValue = 0;
-    valToString(quantityValue);
+    $(quantity).text(String(quantityValue));
   });
 });
