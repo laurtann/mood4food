@@ -1,22 +1,40 @@
-
-
 $(document).ready(function() {
-  let quantityValue = parseInt($("#qty").text());
 
-  $("#plus").click(function() {
+  $(".plus").click(function() {
+    let quantity = $(this).parent().siblings(".qty");
+    let quantityValue = parseInt($(quantity).text());
+
+    let costPerItem = $(this).parent().siblings(".item-cost").text();
+    let totalItemCost = $(this).parent().siblings(".item-total");
+
+    let itemCost = Number(costPerItem.replace(/[\.$]+/g, ""));
+
     quantityValue += 1;
-    $("#qty").text(String(quantityValue));
+    let totalCost = itemCost * quantityValue;
+
+    $(quantity).text(String(quantityValue));
+    $(totalItemCost).text("$" + String(totalCost / 100));
+
   });
 
-  $("#minus").click(function() {
+  $(".minus").click(function() {
+    let quantity = $(this).parent().siblings(".qty");
+    let quantityValue = parseInt($(quantity).text());
+
+    let costPerItem = $(this).parent().siblings(".item-cost").text();
+    let totalItemCost = $(this).parent().siblings(".item-total");
+
+    let itemCost = Number(costPerItem.replace(/[\.$]+/g, ""));
     if (quantityValue > 0) {
       quantityValue -= 1;
     }
-    $("#qty").text(String(quantityValue));
+    let totalCost = itemCost * quantityValue;
+    $(quantity).text(String(quantityValue));
+    $(totalItemCost).text("$" + String(totalCost / 100));
   });
 
-  $("#remove").click(function() {
-    quantityValue = 0;
-    $("#qty").text(String(quantityValue));
+  $(".remove").click(function() {
+    let itemToRemove = $(this).parent().parent(".cart-item");
+    itemToRemove.remove();
   });
 });
