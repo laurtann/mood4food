@@ -34,6 +34,7 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/checkout.js"></script>
   </head>
 
   <body>
@@ -63,7 +64,7 @@
                         </th>
                         <td>$10.00</td>
                         <td>Hamburger</td>
-                        <td>0</td>
+                        <td id="qty">0</td>
                         <td class="edit-cart">
                           <button type="button" class="btn btn-success" id="plus">+</button>
                           <button type="button" class="btn btn-success" id="minus">-</button>
@@ -89,9 +90,9 @@
                         <td>$8.00</td>
                         <td>Salad</td>
                         <td class="edit-cart">
-                          <button type="button" class="btn btn-success">+</button>
-                          <button type="button" class="btn btn-success">-</button>
-                          <button type="button" class="btn btn-success">x</button>
+                          <button type="button" class="btn btn-success" id="plus">+</button>
+                          <button type="button" class="btn btn-success" id="minus">-</button>
+                          <button type="button" class="btn btn-success" id="remove">x</button>
                         </td>
                       </tr>
                     </tbody>
