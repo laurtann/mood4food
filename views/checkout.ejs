@@ -52,6 +52,7 @@
                         <th scope="col">Image</th>
                         <th scope="col">Cost</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Qty</th>
                         <th scope="col">Edit Cart</th>
                       </tr>
                     </thead>
@@ -62,10 +63,11 @@
                         </th>
                         <td>$10.00</td>
                         <td>Hamburger</td>
+                        <td>0</td>
                         <td class="edit-cart">
-                          <button type="button" class="btn btn-success">+</button>
-                          <button type="button" class="btn btn-success">-</button>
-                          <button type="button" class="btn btn-success">x</button>
+                          <button type="button" class="btn btn-success" id="plus">+</button>
+                          <button type="button" class="btn btn-success" id="minus">-</button>
+                          <button type="button" class="btn btn-success" id="remove">x</button>
                         </td>
                       </tr>
                       <tr>
@@ -111,9 +113,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
+                    <th scope="row">0</th>
+                    <td>Test</td>
+                    <td>Run</td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
