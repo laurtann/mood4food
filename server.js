@@ -65,6 +65,11 @@ app.get("/registration", (req, res) => {
   res.render("registration");
 });
 
+// added for dev - move later
+app.get("/myorders", (req, res) => {
+  res.render("myorders");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
