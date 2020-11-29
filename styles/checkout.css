@@ -29,4 +29,28 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
+
+.btn-block {
+  margin-bottom: 3em;
+}
+
+.btn-block a {
+  color: #0f606b;
+}
+
+.btn-block a:hover {
+  color: white;
+}
+
+.btn-success {
+  color: #0f606b;
+  background-color: #a7d2dd;
+  border-color: #a7d2dd;
+  font-family: 'Comfortaa', cursive;
+}
+
+.btn-success:hover {
+  background-color: #f47068;
+  border-color: #f47068;
+}
 /*# sourceMappingURL=checkout.css.map */
