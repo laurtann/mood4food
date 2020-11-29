@@ -29,4 +29,12 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
+
+.btn-block {
+  margin-bottom: 3em;
+}
+
+.btn-block a {
+  color: white;
+}
 /*# sourceMappingURL=checkout.css.map */
