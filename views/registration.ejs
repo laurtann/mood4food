@@ -1,63 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <!-- internal css stylesheet -->
-  <link rel="stylesheet" href="../styles/registration.css">
-  <title>mood4food</title>
-</head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<body>
-  <%- include('partials/_header') %>
-  <div class="signup-form">
-    <form action="/registration" method="post">
-      <h2>Register</h2>
-      <p class="hint-text">Create your account. It's free and only takes a minute.</p>
-      <div class="form-group">
-        <div class="row">
-          <div class="col-xs-6"><input type="text" class="form-control" name="first_name" placeholder="First Name"
-              required="required"></div>
-          <div class="col-xs-6"><input type="text" class="form-control" name="last_name" placeholder="Last Name"
-              required="required"></div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&family=Roboto:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+
+    <!-- Icons Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/registration.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/checkout.css" type="text/css" />
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+    <div class="signup-form">
+      <form action="/registration" method="post">
+        <h2>Register</h2>
+        <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-6"><input type="text" class="form-control" name="first_name" placeholder="First Name"
+                required="required"></div>
+            <div class="col-xs-6"><input type="text" class="form-control" name="last_name" placeholder="Last Name"
+                required="required"></div>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" name="phone" placeholder="Phone Number" required="required">
-      </div>
-      <div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="Email" required="required">
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"
-          required="required">
-      </div>
-      <div class="form-group">
-        <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of
-            Use</a> &amp; <a href="#">Privacy Policy</a></label>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
-      </div>
-    </form>
-    <div class="text-center">Already have an account? <a href="#">Sign in</a></div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-</body>
+        <div class="form-group">
+          <input type="number" class="form-control" name="phone" placeholder="Phone Number" required="required">
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"
+            required="required">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+        </div>
+      </form>
+      <div class="text-center">Already have an account? <a href="/login">Sign in</a></div>
+    </div>
 
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
