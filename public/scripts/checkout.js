@@ -34,10 +34,7 @@ $(document).ready(function() {
   });
 
   $(".remove").click(function() {
-    let quantity = $(this).parent().siblings(".qty");
-    let totalItemCost = $(this).parent().siblings(".item-total");
-
-    $(quantity).text("0");
-    $(totalItemCost).text("$0");
+    let itemToRemove = $(this).parent().parent(".cart-item");
+    itemToRemove.remove();
   });
 });
