@@ -55,6 +55,16 @@ app.get("/checkout", (req, res) => {
   res.render("checkout");
 });
 
+// added for dev - move later
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// added for dev - move later
+app.get("/registration", (req, res) => {
+  res.render("registration");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
