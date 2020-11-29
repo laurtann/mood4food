@@ -23,5 +23,21 @@
 }
 
 .btn-block a {
-  color: white;
+  color: #0f606b;
+}
+
+.btn-block a:hover {
+  color:white;
+}
+
+.btn-success {
+  color: #0f606b;
+  background-color: #a7d2dd;
+  border-color: #a7d2dd;
+  font-family: 'Comfortaa', cursive;;
+}
+
+.btn-success:hover {
+  background-color: #f47068;
+  border-color: #f47068;
 }
