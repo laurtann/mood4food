@@ -11,16 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&family=Roboto:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
-<<<<<<< HEAD
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-=======
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
->>>>>>> home-page
 
     <!-- Icons Font Awesome -->
     <link
@@ -38,12 +34,6 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-<<<<<<< HEAD
-
-  <title>Checkout</title>
-
-=======
->>>>>>> home-page
   </head>
 
   <body>
@@ -54,22 +44,98 @@
           <div class="col">
             <section class="order-info">
               <h2>Your Order</h2>
-              <div></div>
+              <div class="row justify-content-center">
+                <div class="col-auto">
+                  <table class="table table-responsive">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Edit Cart</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">
+                          <img src="https://picsum.photos/200" />
+                        </th>
+                        <td>$10.00</td>
+                        <td>Hamburger</td>
+                        <td class="edit-cart">
+                          <button type="button" class="btn btn-success">+</button>
+                          <button type="button" class="btn btn-success">-</button>
+                          <button type="button" class="btn btn-success">x</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <img src="https://picsum.photos/200" />
+                        </th>
+                        <td>$15.00</td>
+                        <td>Pasta</td>
+                        <td class="edit-cart">
+                          <button type="button" class="btn btn-success">+</button>
+                          <button type="button" class="btn btn-success">-</button>
+                          <button type="button" class="btn btn-success">x</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <img src="https://picsum.photos/200" />
+                        </th>
+                        <td>$8.00</td>
+                        <td>Salad</td>
+                        <td class="edit-cart">
+                          <button type="button" class="btn btn-success">+</button>
+                          <button type="button" class="btn btn-success">-</button>
+                          <button type="button" class="btn btn-success">x</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </section>
           </div>
           <div class="col">
             <section class="place-order">
               <h2>Place Your Order</h2>
-              <div></div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                  </tr>
+                </tbody>
+              </table>
               <form action="/myorders" method="post">
-                <button type="submit">Confirm</button>
+                <button type="submit" class="btn btn-success confirm">Confirm</button>
               </form>
             </section>
           </div>
         </div>
       </div>
       <div class="continue">
-        <button type="submit"><a href="/">Continue Shopping</a></button>
+        <button type="submit" class="btn btn-success"><a href="/">Continue Shopping</a></button>
       </div>
     </main>
   <!-- Bootstrap JS -->

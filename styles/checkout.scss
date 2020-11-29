@@ -8,3 +8,12 @@
 .container {
   padding-top: 2em;
 }
+
+.edit-cart {
+  display: flex;
+}
+
+.place-order form {
+  display: flex;
+  justify-content: flex-end;
+}
