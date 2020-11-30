@@ -14,7 +14,6 @@ module.exports = (db) => {
       SELECT * from food_items;`
       )
       .then((response) => {
-        console.log(response);
         return response.rows;
       });
   };
