@@ -62,8 +62,7 @@
     <main>
       <div class="row justify-content-center">
         <div class="col-auto">
-          <h1>Hello World!</h1>
-          <table class="table">
+          <table class="table table-responsive">
             <tr>
               <th>Image</th>
               <th>Name</th>
@@ -77,7 +76,7 @@
                 <img src="<%= food.food_photo_url %>" />
               </td>
               <td><%= food.name %></td>
-              <td><%= food.cost %></td>
+              <td>$ <%= food.cost %></td>
               <td><%= food.description %></td>
               <td>
                 <button type="button" class="btn btn-success">Add</button>
