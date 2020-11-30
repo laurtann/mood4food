@@ -44,55 +44,47 @@
         <div class="row">
           <div class="col">
             <section class="order-info">
-              <h2>Your Order</h2>
+              <h2>Your Cart</h2>
               <div class="row justify-content-center">
                 <div class="col-auto">
                   <table class="table table-responsive">
                     <thead class="thead-light">
                       <tr>
                         <th scope="col">Image</th>
-                        <th scope="col">Cost</th>
+                        <th scope="col">Cost/Item</th>
+                        <th scope="col">Item Total</th>
                         <th scope="col">Name</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Edit Cart</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">
-                          <img src="https://picsum.photos/200" />
+                      <tr class="cart-item">
+                        <th scope="row" >
+                          <img src="https://picsum.photos/200"/>
                         </th>
-                        <td>$10.00</td>
+                        <td class="item-cost">$10.00</td>
+                        <td class="item-total">$10.00</td>
                         <td>Hamburger</td>
-                        <td id="qty">0</td>
+                        <td class="qty">0</td>
                         <td class="edit-cart">
-                          <button type="button" class="btn btn-success" id="plus">+</button>
-                          <button type="button" class="btn btn-success" id="minus">-</button>
-                          <button type="button" class="btn btn-success" id="remove">x</button>
+                          <button type="button" class="btn btn-success plus">+</button>
+                          <button type="button" class="btn btn-success minus">-</button>
+                          <button type="button" class="btn btn-success remove">x</button>
                         </td>
                       </tr>
-                      <tr>
+                      <tr class="cart-item">
                         <th scope="row">
                           <img src="https://picsum.photos/200" />
                         </th>
-                        <td>$15.00</td>
+                        <td class="item-cost">$15.00</td>
+                        <td class="item-total">$10.00</td>
                         <td>Pasta</td>
+                        <td class="qty">0</td>
                         <td class="edit-cart">
-                          <button type="button" class="btn btn-success">+</button>
-                          <button type="button" class="btn btn-success">-</button>
-                          <button type="button" class="btn btn-success">x</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <img src="https://picsum.photos/200" />
-                        </th>
-                        <td>$8.00</td>
-                        <td>Salad</td>
-                        <td class="edit-cart">
-                          <button type="button" class="btn btn-success" id="plus">+</button>
-                          <button type="button" class="btn btn-success" id="minus">-</button>
-                          <button type="button" class="btn btn-success" id="remove">x</button>
+                          <button type="button" class="btn btn-success plus">+</button>
+                          <button type="button" class="btn btn-success minus">-</button>
+                          <button type="button" class="btn btn-success remove">x</button>
                         </td>
                       </tr>
                     </tbody>
@@ -107,26 +99,21 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Qty</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">0</th>
-                    <td>Test</td>
-                    <td>Run</td>
+                    <th scope="row">Item Total</th>
+                    <td class="order-total"></td>
                   </tr>
                   <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
+                    <th scope="row">HST/GST</th>
+                    <td class="order-tax"></td>
                   </tr>
                   <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
+                    <th scope="row">Grand Total</th>
+                    <td class="order-grand-total"></td>
                   </tr>
                 </tbody>
               </table>
@@ -136,10 +123,11 @@
             </section>
           </div>
         </div>
+        <div class="continue">
+          <button type="submit" class="btn btn-success btn-block"><a href="/">Continue Shopping</a></button>
+        </div>
       </div>
-      <div class="continue">
-        <button type="submit" class="btn btn-success"><a href="/">Continue Shopping</a></button>
-      </div>
+
     </main>
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

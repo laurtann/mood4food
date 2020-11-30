@@ -1,8 +1,10 @@
 body {
   background-color: #EEE;
+  font-family: 'Roboto', sans-serif;
 }
 
-body h1 {
-  color: lightblue;
+body h1, body h2 {
+  color: #0f606b;
+  font-family: 'Comfortaa', cursive;
 }
 /*# sourceMappingURL=layout.css.map */

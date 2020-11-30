@@ -11,7 +11,7 @@ module.exports = (db) => {
     return db
       .query(
         `
-      SELECT * from food_items`
+      SELECT * from food_items;`
       )
       .then((response) => {
         console.log(response);
