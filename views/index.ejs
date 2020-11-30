@@ -62,35 +62,31 @@
     <main>
       <div class="row justify-content-center">
         <div class="col-auto">
-          <% for(const food of menuItems) { %>
-          <table class="table table-responsive">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Add to Cart</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">
-                  <img src="<%= food.food_photo_url %>" />
-                </th>
-                <td><%= food.cost %></td>
-                <td><%= food.name %></td>
-                <td><%= food.description %></td>
-                <td>
-                  <button type="button" class="btn btn-success">Add</button>
-                </td>
-              </tr>
-            </tbody>
+          <h1>Hello World!</h1>
+          <table class="table">
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Cost</th>
+              <th>Description</th>
+              <th>Add to Cart</th>
+            </tr>
+            <% for(const food of menuItems) { %>
+            <tr>
+              <td>
+                <img src="<%= food.food_photo_url %>" />
+              </td>
+              <td><%= food.name %></td>
+              <td><%= food.cost %></td>
+              <td><%= food.description %></td>
+              <td>
+                <button type="button" class="btn btn-success">Add</button>
+              </td>
+            </tr>
+            <% } %>
           </table>
         </div>
       </div>
-
-      <% } %>
     </main>
 
     <footer></footer>
