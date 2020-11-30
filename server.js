@@ -55,10 +55,10 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   getAllMenuItems().then((rows) => {
-    console.log(rows);
-    res.render("index");
+    const templateVars = { menuItems: rows };
+    console.log(templateVars);
+    res.render("index", templateVars);
   });
-  //res.render("index");
 });
 
 // added for dev - move later
