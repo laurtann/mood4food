@@ -1,17 +1,14 @@
-const properties = require("./json/properties.json");
-const users = require("./json/users.json");
 const { Pool } = require("pg");
 
-const pool = new Pool({
-  user: "labber",
-  password: "labber",
-  host: "localhost",
-  database: "midterm",
-});
+// PG database client/connection setup
 
-module.exports = (pool) => {
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
+
+module.exports = (db) => {
   const getAllMenuItems = () => {
-    return pool
+    return db
       .query(
         `
       SELECT * from food_items`
