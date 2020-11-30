@@ -11,7 +11,7 @@ module.exports = (db) => {
     return db
       .query(
         `
-      SELECT * from food_items`
+      SELECT * from food_items;`
       )
       .then((response) => {
         console.log(response);
@@ -21,6 +21,82 @@ module.exports = (db) => {
 
   return { getAllMenuItems };
 };
+
+// NOT TESTED
+
+// Populate order -> id is order ID from cookie, user_id is user ID from cookie
+module.exports = (db) => {
+  const getCartItems = (id, user_id, food_id, food_qty) => {
+    return db
+      .query(
+        `
+      INSERT INTO orders
+      VALUES (${id}, ${user_id}, ${food_id}, ${food_qty}, "ip");`
+      )
+      .then((response) => {
+        console.log("success");
+      }).catch(err => null);
+  };
+
+  return { getCartItems };
+};
+
+// change quantity => order ID from cookie, foodID from table, qty from table
+module.exports = (db) => {
+  const getCartItems = (orderID, foodID, qty) => {
+    return db
+      .query(
+        `
+      UPDATE orders SET food.qty = ${qty}
+      WHERE orders.id = ${orderID}
+      AND orders.food_id = ${foodID};`
+      )
+      .then((response) => {
+        return response.rows;
+      }).catch(err => null);
+  };
+
+  return { getCartItems };
+};
+
+// query for checkout page
+module.exports = (db) => {
+  const getCartItems = (orderID) => {
+    return db
+      .query(
+        `
+      SELECT name, cost, orders.food_qty as Qty
+      FROM food_items
+      JOIN orders ON food_items.id = orders.food_id
+      WHERE orders_id = ${orderID};`
+      )
+      .then((response) => {
+        return response.rows;
+      }).catch(err => null);
+  };
+
+  return { getCartItems };
+};
+
+// Remove item from cart => this will prob have to be changed once we know the structure of the tbl
+module.exports = (db) => {
+  const removeItem = (orderID, foodID) => {
+    return db
+      .query(
+        `
+      DELETE FROM orders
+      WHERE orders.id = ${orderID}
+      AND orders.food_id = ${foodID}`
+      )
+      .then((response) => {
+        return response.rows;
+      }).catch(err => null);
+  };
+
+  return { removeItem };
+};
+
+
 
 /**
  * Get all food items from a menu.
