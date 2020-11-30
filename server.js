@@ -18,8 +18,8 @@ db.connect();
 
 //psql database helper functions
 
-const dbHelpers = require("/queryDatabase.js");
-const { getAllMenuItems } = dbHelpers(db);
+// const dbHelpers = require("/queryDatabase.js");
+// const { getAllMenuItems } = dbHelpers(db);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -54,10 +54,16 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  getAllMenuItems().then((rows) => {
-    console.log(response.rows);
-    res.render("index");
-  });
+  db.query(`SELECT * from food_items`)
+    .then((res) => res.rows)
+    .catch((err) => {
+      console.log("query error:", err);
+    });
+  // getAllMenuItems().then((rows) => {
+  //   console.log(response.rows);
+  //   res.render("index");
+  // });
+  res.render("index");
 });
 
 // added for dev - move later
