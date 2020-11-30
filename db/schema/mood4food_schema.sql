@@ -17,13 +17,13 @@ CREATE TABLE food_items (
   cost INTEGER NOT NULL,
   description TEXT NOT NULL,
   in_stock BOOLEAN NOT NULL,
-  food_photo_url TEXT NOT NULL,
+  food_photo_url TEXT NOT NULL
 );
 
 CREATE TABLE orders(
 	id SERIAL PRIMARY KEY NOT NULL,
-	user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-	food_id INTEGER NOT NULL REFERENCES food_items(id) ON DELETE CASCADE,
   food_qty INTEGER NOT NULL,
   order_status VARCHAR(255) NOT NULL,
+	user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+	food_id INTEGER NOT NULL REFERENCES food_items(id) ON DELETE CASCADE
 );
