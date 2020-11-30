@@ -7,10 +7,17 @@ const accountSid = "AC74082a20169c8f3ee23fd7fd6a3574c9";
 const authToken = "5c54cd8fcfeb75e236672ee9ea9aaaf3";
 const client = require("twilio")(accountSid, authToken);
 
-client.messages
-  .create({
-    body: "This is the ship that made the Kessel Run in fourteen parsecs?",
-    from: "+12055966681",
-    to: "+16473823731",
-  })
-  .then((message) => console.log(message.sid));
+const myName = "Julia";
+const myOrderNumber = 101;
+const myPhoneNumber = "+16473823731";
+const sendMessage = function (name, phoneNumber, orderNumber) {
+  client.messages
+    .create({
+      body: `Dear ${name}, Thank you for placing your order. Your order number is ${orderNumber}. We will notify you when it is ready for pickup shortly.`,
+      from: "+12055966681",
+      to: phoneNumber,
+    })
+    .then((message) => console.log(message.sid));
+};
+
+sendMessage(myName, myPhoneNumber, myOrderNumber);
