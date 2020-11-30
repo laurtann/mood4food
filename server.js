@@ -1,10 +1,6 @@
 // load .env data into process.env
 require("dotenv").config();
 
-//psql database helper functions
-const dbHelpers = require("/queryDatabase.js");
-const { getAllMenuItems } = dbHelpers(db);
-
 // Web server config
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
@@ -19,6 +15,11 @@ const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
+
+//psql database helper functions
+
+// const dbHelpers = require("/queryDatabase.js");
+//const { getAllMenuItems } = dbHelpers(db);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -53,10 +54,11 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  getAllMenuItems().then((rows) => {
-    console.log(response.rows);
-    res.render("home");
-  });
+  // getAllMenuItems().then((rows) => {
+  //   console.log(response.rows);
+
+  // });
+  res.render("index");
 });
 
 // added for dev - move later
