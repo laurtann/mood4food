@@ -9,22 +9,38 @@ const pool = new Pool({
   database: "midterm",
 });
 
+module.exports = (pool) => {
+  const getAllMenuItems = () => {
+    return pool
+      .query(
+        `
+      SELECT * from food_items`
+      )
+      .then((response) => {
+        console.log(response);
+        return response.rows;
+      });
+  };
+
+  return { getAllMenuItems };
+};
+
 /**
  * Get all food items from a menu.
  * @return {Promise<[{}]>} A promise to the entire menu.
  */
-const getAllMenuItems = function () {
-  const queryString = `
-  SELECT * from food_items`;
-  return pool
-    .query(queryString)
-    .then((res) => res.rows)
-    .catch((err) => {
-      console.log("query error:", err);
-    });
-};
+// const getAllMenuItems = function () {
+//   const queryString = `
+//   SELECT * from food_items`;
+//   return pool
+//     .query(queryString)
+//     .then((res) => res.rows)
+//     .catch((err) => {
+//       console.log("query error:", err);
+//     });
+// };
 
-exports.getAllMenuItems = getAllMenuItems;
+// exports.getAllMenuItems = getAllMenuItems;
 
 // /**
 //  * Get a single user from the database given their email.
