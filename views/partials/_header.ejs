@@ -7,7 +7,9 @@
     <ul class="navbar-nav float-right">
       <%if(userId) {%>
         <li class="nav-item">
-          <a class="nav-link" href="/logout"><strong>Logout</strong></a>
+          <form class="form-inline" action = "/logout" method = "POST">
+            <a class="nav-link" href="/logout"><strong>Logout</strong></a>
+          </form>
         </li>
         <%}else{%>
       <li class="nav-item">
