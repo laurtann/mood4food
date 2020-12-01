@@ -9,8 +9,12 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
+<<<<<<< HEAD
 // const session = require('express-session')
 const cookieSession = require("cookie-session");
+=======
+const cookieSession = require('cookie-session');
+>>>>>>> features/orderdb1
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -22,6 +26,9 @@ db.connect();
 
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
+
+const getUser = require("./1_get_phone_num.js");
+const { getPhoneNumFromId } = getUser(db);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -67,7 +74,6 @@ app.get("/", (req, res) => {
   getAllMenuItems().then((rows) => {
     let userId = req.session && req.session.userId;
     const templateVars = { menuItems: rows, userId };
-    console.log(templateVars);
     res.render("index", templateVars);
   });
 });
@@ -97,20 +103,34 @@ app.get("/register", (req, res) => {
 
 app.post("/register", (req, res) => {
   req.session.userId = 1;
+  req.session.orderId = 1;
   res.redirect("/");
 });
 
-// added for dev - move later
-// app.get("/myorders", (req, res) => {
-//   let userId = req.session.userId;
-//   res.render("myorders", {userId});
-// });
 
 //jpiotrowski0@jigsy.com --> password
+<<<<<<< HEAD
 app.post("/login", (req, res) => {
+=======
+app.post('/login', (req, res) => {
+  // cookie
+>>>>>>> features/orderdb1
   req.session.userId = 1;
+  req.session.orderId = 1;
+
+  // get phoneNum
+  let userPhoneNumber;
+  getPhoneNumFromId().then((rows) => {
+    userPhoneNumber =  rows[0].phone_num;
+    return userPhoneNumber;
+  });
   res.redirect("/");
 });
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> features/orderdb1
 
 app.get("/logout", (req, res) => {
   req.session = null;

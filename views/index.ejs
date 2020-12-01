@@ -62,6 +62,7 @@
                 <table class="table table-responsive">
                   <thead class="thead-light">
                     <tr>
+                      <th scope="col" id="hide-food-id">Food ID</th>
                       <th scope="col">Image</th>
                       <th scope="col">Name</th>
                       <th scope="col">Cost</th>
@@ -73,29 +74,24 @@
                   </thead>
                   <tbody>
                     <% for(const food of menuItems) { %>
-                    <tr>
-                      <td class='food-photo'>
-                        <img src="<%= food.food_photo_url %>" />
-                      </td>
-                      <td><%= food.name %></td>
-                      <td class="item-cost">$<%= food.cost %></td>
-                      <td><%= food.description %></td>
-                      <td class="qty">0</td>
-                      <td class="item-total">$0</td>
-                      <td class="edit-cart">
-                        <div class='btn-inc-dec-rem'>
-                          <button type="button" class="btn btn-success plus"><i class="fas fa-arrow-up"></i>
-                          </button>
-                          <button type="button" class="btn btn-success minus"><i class="fas fa-arrow-down"></i>
-                          </button>
-                          <button type="button" class="btn btn-success remove"><i class="far fa-times-circle"></i>
-                          </button>
-                        </div>
-
-                      </td>
-                    </tr>
-                    <% } %>
-                </table>
+                      <tr class="food-row">
+                        <td class="hide food-id"><%= food.id %></td>
+                        <td>
+                          <img class="foot-photos" src="<%= food.food_photo_url %>" />
+                        </td>
+                        <td class="food-name"><%= food.name %></td>
+                        <td class="item-cost">$<%= food.cost %></td>
+                        <td class="food-description"><%= food.description %></td>
+                        <td class="qty">0</td>
+                        <td class="item-total">$0</td>
+                        <td class="edit-cart">
+                          <button type="button" class="btn btn-success plus">+</button>
+                          <button type="button" class="btn btn-success minus">-</button>
+                          <button type="button" class="btn btn-success remove">x</button>
+                        </td>
+                      </tr>
+                      <% } %>
+                    </table>
               </div>
             </div>
           </section>
@@ -124,8 +120,8 @@
                 </tr>
               </tbody>
             </table>
-            <form action="/myorders" method="post">
-              <button type="submit" class="btn btn-success" id="confirm">Confirm</button>
+            <form>
+              <button type="button" class="btn btn-success" id="confirm">Confirm</button>
             </form>
           </section>
         </div>
