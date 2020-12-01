@@ -1,15 +1,30 @@
 nav {
   height: 120px;
   background-color: #0f606b;
-  font-family: 'Roboto', sans-serif;
+  background-color: #0f606b;
+  background-color: #0f606b;
+  background-image: url("https://www.transparenttextures.com/patterns/dark-circles.png");
 }
 
 .navbar-brand {
   font-family: 'Comfortaa', cursive;
+  padding-left: 3%;
+}
+
+.nav-item {
+  font-family: 'Comfortaa', cursive;
+}
+
+.nav-item:after {
+  color: white;
 }
 
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-collapse {
     justify-content: flex-end;
   }
+}
+
+.logo {
+  font-size: 2.5em;
 }
