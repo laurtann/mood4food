@@ -49,15 +49,6 @@ app.use(
   })
 );
 
-// var sess = {
-//   secret: 'keyboard cat',
-//   cookie: {}
-// }
-
-// app.use(session(sess))
-
-app.use(session(sess));
-
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
