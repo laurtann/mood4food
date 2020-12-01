@@ -89,7 +89,8 @@ app.get("/login", (req, res) => {
 
 // added for dev - move later
 app.get("/register", (req, res) => {
-  res.render("registration");
+  let userId = req.session && req.session.userId;
+  res.render("registration", {userId:null});
 });
 
 // added for dev - move later
