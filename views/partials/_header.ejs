@@ -6,25 +6,28 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav float-right">
       <%if(userId) {%>
+        <li class="nav-item active">
+          <a class="nav-link" href="/"><strong>Menu</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link cart" href="/#checkout"><strong>Checkout</strong><i class="fas fa-shopping-cart"></i></a>
+        </li>
         <li class="nav-item">
           <form class="form-inline" action = "/logout" method = "POST">
             <a class="nav-link" href="/logout"><strong>Logout</strong></a>
           </form>
         </li>
         <%}else{%>
-      <li class="nav-item">
-        <a class="nav-link" href="/login"><strong>Login</strong></a>
-      </li>
-      <%}%>
-      <li class="nav-item active">
-        <a class="nav-link" href="/"><strong>Menu</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/register"><strong>Register</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link cart" href="/#checkout"><strong>Checkout</strong><i class="fas fa-shopping-cart"></i></a>
-      </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/"><strong>Menu</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><strong>Login</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register"><strong>Register</strong></a>
+          </li>
+        <%}%>
     </ul>
   </div>
 </nav>
