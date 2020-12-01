@@ -76,8 +76,8 @@
                     <% for(const food of menuItems) { %>
                       <tr class="food-row">
                         <td class="hide food-id"><%= food.id %></td>
-                        <td>
-                          <img class="foot-photos" src="<%= food.food_photo_url %>" />
+                        <td class='food-photo'>
+                          <img src="<%= food.food_photo_url %>" />
                         </td>
                         <td class="food-name"><%= food.name %></td>
                         <td class="item-cost">$<%= food.cost %></td>
