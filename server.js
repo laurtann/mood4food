@@ -9,7 +9,8 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
-const session = require('express-session')
+const session = require("express-session");
+const MessagingResponse = require("twilio").twiml.MessagingResponse;
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -41,12 +42,11 @@ app.use(
 app.use(express.static("public"));
 
 var sess = {
-  secret: 'keyboard cat',
-  cookie: {}
-}
+  secret: "keyboard cat",
+  cookie: {},
+};
 
-app.use(session(sess))
-
+app.use(session(sess));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -74,16 +74,16 @@ app.get("/", (req, res) => {
 // added for dev - move later
 app.get("/checkout", (req, res) => {
   let userId = req.session && req.session.userId;
-  res.render("checkout", {userId});
+  res.render("checkout", { userId });
 });
 
 // added for dev - move later
 app.get("/login", (req, res) => {
   let userId = req.session && req.session.userId;
-  if(userId){
-    res.redirect("/")
-  }else{
-    res.render("login", {userId:null});
+  if (userId) {
+    res.redirect("/");
+  } else {
+    res.render("login", { userId: null });
   }
 });
 
@@ -95,14 +95,14 @@ app.get("/register", (req, res) => {
 // added for dev - move later
 app.get("/myorders", (req, res) => {
   let userId = req.session && req.session.userId;
-  res.render("myorders", {userId});
+  res.render("myorders", { userId });
 });
 
 //jpiotrowski0@jigsy.com --> password
-app.post('/login', (req, res) => {
+app.post("/login", (req, res) => {
   req.session.userId = 1;
-  res.redirect("/")
-})
+  res.redirect("/");
+});
 
 app.get("/logout", (req, res) => {
   req.session.userId = null;
@@ -112,5 +112,3 @@ app.get("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-

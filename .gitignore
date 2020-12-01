@@ -1,5 +1,6 @@
 node_modules/
 public/styles
 .env
+.twilio.env
 *.log
 *.sqlite3
