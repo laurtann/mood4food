@@ -1,3 +1,16 @@
+const updateCartTotal = () => {
+
+  let itemTotals = document.getElementsByClassName("item-total");
+  let total = 0;
+  for (let itemTotal of itemTotals) {
+    const price = parseFloat(itemTotal.innerText.replace('$', ''));
+    total += price;
+  }
+
+  return total;
+}
+
+
 $(document).ready(function() {
 
   $(".plus").click(function() {
@@ -13,8 +26,13 @@ $(document).ready(function() {
     let totalCost = itemCost * quantityValue;
 
     $(quantity).text(String(quantityValue));
-    $(totalItemCost).text("$" + String(totalCost / 100));
+    $(totalItemCost).text("$" + String(totalCost));
 
+    const tax = updateCartTotal() * .15;
+    const grandTotal = updateCartTotal() + tax;
+    $(".order-total").text("$" + updateCartTotal());
+    $(".order-tax").text("$" + tax.toFixed(2));
+    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
   });
 
   $(".minus").click(function() {
@@ -30,11 +48,28 @@ $(document).ready(function() {
     }
     let totalCost = itemCost * quantityValue;
     $(quantity).text(String(quantityValue));
-    $(totalItemCost).text("$" + String(totalCost / 100));
+    $(totalItemCost).text("$" + String(totalCost));
+
+    const tax = updateCartTotal() * .15;
+    const grandTotal = updateCartTotal() + tax;
+    $(".order-total").text("$" + updateCartTotal());
+    $(".order-tax").text("$" + tax.toFixed(2));
+    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
   });
 
   $(".remove").click(function() {
-    let itemToRemove = $(this).parent().parent(".cart-item");
-    itemToRemove.remove();
+    // let itemToRemove = $(this).parent().parent(".cart-item");
+    // itemToRemove.remove();
+    let quantity = $(this).parent().siblings(".qty");
+    let totalItemCost = $(this).parent().siblings(".item-total");
+
+    $(quantity).text("0");
+    $(totalItemCost).text("$0");
+
+    const tax = updateCartTotal() * .15;
+    const grandTotal = updateCartTotal() + tax;
+    $(".order-total").text("$" + updateCartTotal());
+    $(".order-tax").text("$" + tax.toFixed(2));
+    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
   });
 });

@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+     <!-- Required meta tags -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+     <!-- Google Fonts -->
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&family=Roboto:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet">
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+     <!-- Bootstrap CSS -->
+     <link
+       rel="stylesheet"
+       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+       crossorigin="anonymous"
+     />
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-      crossorigin="anonymous"
-    />
+     <!-- Icons Font Awesome -->
+     <link
+       rel="stylesheet"
+       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+       integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+       crossorigin="anonymous"
+     />
 
-    <!-- Icons Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-      crossorigin="anonymous"
-    />
+     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+     <link rel="stylesheet" href="/styles/checkout.css" type="text/css" />
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/index.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+     <script type="text/javascript" src="/scripts/app.js"></script>
+     <script type="text/javascript" src="/scripts/checkout.js"></script>
   </head>
 
   <body>
@@ -58,36 +52,85 @@
         </div>
       </div>
     </header>
-
-    <main>
-      <div class="row justify-content-center">
-        <div class="col-auto">
-          <table class="table table-responsive">
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Cost</th>
-              <th>Description</th>
-              <th>Add to Cart</th>
-            </tr>
-            <% for(const food of menuItems) { %>
-            <tr>
-              <td>
-                <img src="<%= food.food_photo_url %>" />
-              </td>
-              <td><%= food.name %></td>
-              <td>$ <%= food.cost %></td>
-              <td><%= food.description %></td>
-              <td>
-                <button type="button" class="btn btn-success">Add</button>
-              </td>
-            </tr>
-            <% } %>
-          </table>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col col-sm-8">
+          <section class="order-info">
+            <h2>Your Cart</h2>
+            <div class="row justify-content-center">
+              <div class="col-auto">
+                <table class="table table-responsive">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Image</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Cost</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Item Total</th>
+                      <th scope="col">Add to Cart</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(const food of menuItems) { %>
+                      <tr>
+                        <td>
+                          <img src="<%= food.food_photo_url %>" />
+                        </td>
+                        <td><%= food.name %></td>
+                        <td class="item-cost">$<%= food.cost %></td>
+                        <td><%= food.description %></td>
+                        <td class="qty">0</td>
+                        <td class="item-total">$0</td>
+                        <td class="edit-cart">
+                          <button type="button" class="btn btn-success plus">+</button>
+                          <button type="button" class="btn btn-success minus">-</button>
+                          <button type="button" class="btn btn-success remove">x</button>
+                        </td>
+                      </tr>
+                      <% } %>
+                    </table>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col col-sm-4">
+          <section class="place-order">
+            <h2>Place Your Order</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Item Total</th>
+                  <td class="order-total"></td>
+                </tr>
+                <tr>
+                  <th scope="row">HST/GST</th>
+                  <td class="order-tax"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Grand Total</th>
+                  <td class="order-grand-total"></td>
+                </tr>
+              </tbody>
+            </table>
+            <form action="/myorders" method="post">
+              <button type="submit" class="btn btn-success confirm">Confirm</button>
+            </form>
+          </section>
         </div>
       </div>
     </main>
 
     <footer></footer>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
