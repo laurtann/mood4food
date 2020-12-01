@@ -122,7 +122,7 @@ app.get("/confirm", function (req, res) {
 
 app.post("/confirm", (req, res) => {
   const twiml = new MessagingResponse();
-
+  console.log("in confirmation");
   //sms response stored in req.body.Body
   twiml.message(
     `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${req.body.Body} minutes.`
@@ -130,9 +130,7 @@ app.post("/confirm", (req, res) => {
 
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
-  res.render("confirmation", { deliveryTime: message });
 });
-
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
   req.session.userId = 1;
