@@ -10,9 +10,20 @@ const updateCartTotal = () => {
   return total;
 }
 
+const addToOrder = () => {
+  queryArray = [];
+  const foodId = document.getElementsByClassName("food-id");
+  const foodQty = document.getElementsByClassName("qty");
+
+  for (let i = 0; i < foodQty.length; i++) {
+    if (Number(foodQty[i].innerText) !== 0) {
+      queryArray.push([1, 1, Number(foodId[i].innerText), Number(foodQty[i].innerText), "ip"]);
+    }
+  }
+  return queryArray;
+}
 
 $(document).ready(function() {
-
   $(".plus").click(function() {
     let quantity = $(this).parent().siblings(".qty");
     let quantityValue = parseInt($(quantity).text());
@@ -58,8 +69,6 @@ $(document).ready(function() {
   });
 
   $(".remove").click(function() {
-    // let itemToRemove = $(this).parent().parent(".cart-item");
-    // itemToRemove.remove();
     let quantity = $(this).parent().siblings(".qty");
     let totalItemCost = $(this).parent().siblings(".item-total");
 
@@ -72,4 +81,12 @@ $(document).ready(function() {
     $(".order-tax").text("$" + tax.toFixed(2));
     $(".order-grand-total").text("$" + grandTotal.toFixed(2));
   });
+
+  $("#confirm").click(function() {
+    console.log(addToOrder());
+  });
 });
+
+
+
+

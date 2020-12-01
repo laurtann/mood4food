@@ -22,7 +22,7 @@ db.connect();
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
 
-const getUser = require("./checkout-query");
+const getUser = require("./1_get_phone_num.js");
 const { getPhoneNumFromId } = getUser(db);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -101,6 +101,7 @@ app.post('/register', (req, res) => {
   res.redirect("/");
 });
 
+
 //jpiotrowski0@jigsy.com --> password
 app.post('/login', (req, res) => {
   // cookie
@@ -111,10 +112,12 @@ app.post('/login', (req, res) => {
   let userPhoneNumber;
   getPhoneNumFromId().then((rows) => {
     userPhoneNumber =  rows[0].phone_num;
+    return userPhoneNumber;
   });
-
   res.redirect("/");
-})
+});
+
+
 
 app.get("/logout", (req, res) => {
   req.session = null;
@@ -124,5 +127,3 @@ app.get("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-
