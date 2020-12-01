@@ -15,6 +15,10 @@ nav {
   font-family: 'Comfortaa', cursive;
 }
 
+.nav-item:after {
+  color: white;
+}
+
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-collapse {
     -webkit-box-pack: end;
