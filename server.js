@@ -117,24 +117,20 @@ app.get("/confirm", function (req, res) {
       from: "+12055966681",
       to: "+16473823731",
     })
-    .then(
-      (message) => res.render("confirmation", { message })
-      // res.send(
-      //   `The message was sent to: ${message.to} and delivered sucessfully!`
-      // )
-    );
+    .then((message) => res.render("confirmation", { message: message }));
 });
 
-app.post("/sms", (req, res) => {
+app.post("/confirm", (req, res) => {
   const twiml = new MessagingResponse();
 
   //sms response stored in req.body.Body
   twiml.message(
     `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${req.body.Body} minutes.`
   );
-  console.log(req.body.Body);
+
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
+  res.render("confirmation", { deliveryTime: message });
 });
 
 //jpiotrowski0@jigsy.com --> password
