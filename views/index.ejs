@@ -52,37 +52,80 @@
         </div>
       </div>
     </header>
-
-    <main>
-      <div class="row justify-content-center">
-        <div class="col-auto col-sm-8">
-          <table class="table table-responsive">
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Cost</th>
-              <th>Description</th>
-              <th>Add to Cart</th>
-            </tr>
-            <% for(const food of menuItems) { %>
-            <tr>
-              <td>
-                <img src="<%= food.food_photo_url %>" />
-              </td>
-              <td><%= food.name %></td>
-              <td>$ <%= food.cost %></td>
-              <td><%= food.description %></td>
-              <td>
-                <button type="button" class="btn btn-success">Add</button>
-              </td>
-            </tr>
-            <% } %>
-          </table>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col col-sm-8">
+          <section class="order-info">
+            <h2>Your Cart</h2>
+            <div class="row justify-content-center">
+              <div class="col-auto">
+                <table class="table table-responsive">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Image</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Cost</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Item Total</th>
+                      <th scope="col">Add to Cart</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(const food of menuItems) { %>
+                      <tr>
+                        <td>
+                          <img src="<%= food.food_photo_url %>" />
+                        </td>
+                        <td><%= food.name %></td>
+                        <td class="item-cost">$<%= food.cost %></td>
+                        <td><%= food.description %></td>
+                        <td class="qty">0</td>
+                        <td class="item-total"><%= food.cost %></td>
+                        <td class="edit-cart">
+                          <button type="button" class="btn btn-success plus">+</button>
+                          <button type="button" class="btn btn-success minus">-</button>
+                          <button type="button" class="btn btn-success remove">x</button>
+                        </td>
+                      </tr>
+                      <% } %>
+                    </table>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col col-sm-4">
+          <section class="place-order">
+            <h2>Place Your Order</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Item Total</th>
+                  <td class="order-total"></td>
+                </tr>
+                <tr>
+                  <th scope="row">HST/GST</th>
+                  <td class="order-tax"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Grand Total</th>
+                  <td class="order-grand-total"></td>
+                </tr>
+              </tbody>
+            </table>
+            <form action="/myorders" method="post">
+              <button type="submit" class="btn btn-success confirm">Confirm</button>
+            </form>
+          </section>
         </div>
       </div>
     </main>
-    <div class="col-sm-4">col-sm-4</div>
-    </div>
 
     <footer></footer>
     <!-- Bootstrap JS -->

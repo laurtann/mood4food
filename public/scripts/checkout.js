@@ -13,7 +13,7 @@ $(document).ready(function() {
     let totalCost = itemCost * quantityValue;
 
     $(quantity).text(String(quantityValue));
-    $(totalItemCost).text("$" + String(totalCost / 100));
+    $(totalItemCost).text("$" + String(totalCost));
 
   });
 
@@ -30,11 +30,16 @@ $(document).ready(function() {
     }
     let totalCost = itemCost * quantityValue;
     $(quantity).text(String(quantityValue));
-    $(totalItemCost).text("$" + String(totalCost / 100));
+    $(totalItemCost).text("$" + String(totalCost));
   });
 
   $(".remove").click(function() {
-    let itemToRemove = $(this).parent().parent(".cart-item");
-    itemToRemove.remove();
+    // let itemToRemove = $(this).parent().parent(".cart-item");
+    // itemToRemove.remove();
+    let quantity = $(this).parent().siblings(".qty");
+    let totalItemCost = $(this).parent().siblings(".item-total");
+
+    $(quantity).text("0");
+    $(totalItemCost).text("$0");
   });
 });
