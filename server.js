@@ -9,7 +9,6 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
-// const session = require('express-session')
 const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
@@ -22,6 +21,9 @@ db.connect();
 
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
+
+const getUser = require("./checkout-query");
+const { getPhoneNumFromId } = getUser(db);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -47,13 +49,6 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
-// var sess = {
-//   secret: 'keyboard cat',
-//   cookie: {}
-// }
-
-// app.use(session(sess))
-
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -73,7 +68,6 @@ app.get("/", (req, res) => {
   getAllMenuItems().then((rows) => {
     let userId = req.session && req.session.userId;
     const templateVars = { menuItems: rows, userId };
-    console.log(templateVars);
     res.render("index", templateVars);
   });
 });
@@ -103,18 +97,22 @@ app.get("/register", (req, res) => {
 
 app.post('/register', (req, res) => {
   req.session.userId = 1;
+  req.session.orderId = 1;
   res.redirect("/");
 });
 
-// added for dev - move later
-// app.get("/myorders", (req, res) => {
-//   let userId = req.session.userId;
-//   res.render("myorders", {userId});
-// });
-
 //jpiotrowski0@jigsy.com --> password
 app.post('/login', (req, res) => {
+  // cookie
   req.session.userId = 1;
+  req.session.orderId = 1;
+
+  // get phoneNum
+  let userPhoneNumber;
+  getPhoneNumFromId().then((rows) => {
+    userPhoneNumber =  rows[0].phone_num;
+  });
+
   res.redirect("/");
 })
 
