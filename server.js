@@ -9,7 +9,8 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
-const session = require('express-session')
+// const session = require('express-session')
+const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -40,12 +41,18 @@ app.use(
 );
 app.use(express.static("public"));
 
-var sess = {
-  secret: 'keyboard cat',
-  cookie: {}
-}
+app.use(cookieSession({
+  name: 'session',
+  keys: ['mOOd4F00d'],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
-app.use(session(sess))
+// var sess = {
+//   secret: 'keyboard cat',
+//   cookie: {}
+// }
+
+// app.use(session(sess))
 
 
 // Separated Routes for each Resource
@@ -79,7 +86,7 @@ app.get("/checkout", (req, res) => {
 
 // added for dev - move later
 app.get("/login", (req, res) => {
-  let userId = req.session && req.session.userId;
+  let userId = req.session.userId;
   if(userId){
     res.redirect("/")
   }else{
@@ -89,24 +96,30 @@ app.get("/login", (req, res) => {
 
 // added for dev - move later
 app.get("/register", (req, res) => {
-  let userId = req.session && req.session.userId;
+  // req.session['order_id'] = 123;
+  // let userId = req.session.userId;
   res.render("registration", {userId:null});
 });
 
-// added for dev - move later
-app.get("/myorders", (req, res) => {
-  let userId = req.session && req.session.userId;
-  res.render("myorders", {userId});
+app.post('/register', (req, res) => {
+  req.session.userId = 1;
+  res.redirect("/");
 });
+
+// added for dev - move later
+// app.get("/myorders", (req, res) => {
+//   let userId = req.session.userId;
+//   res.render("myorders", {userId});
+// });
 
 //jpiotrowski0@jigsy.com --> password
 app.post('/login', (req, res) => {
   req.session.userId = 1;
-  res.redirect("/")
+  res.redirect("/");
 })
 
 app.get("/logout", (req, res) => {
-  req.session.userId = null;
+  req.session = null;
   res.redirect("/");
 });
 
