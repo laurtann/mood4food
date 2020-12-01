@@ -1,0 +1,16 @@
+.hero {
+  background-image: url("https://images.pexels.com/photos/2098134/pexels-photo-2098134.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+  width:100%;
+  background-size: cover;
+  background-position: center;
+  height: 225px;
+}
+
+.hero-text {
+  display: flex;
+  color: #fafbf5;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  font-size: 3em;
+  justify-content: center;
+  align-content: center;
+}

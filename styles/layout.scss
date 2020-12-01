@@ -1,7 +1,7 @@
 // See: https://sass-lang.com/
 
 body {
-  background-color: #EEE;
+  background-color: #fafbf5;
 
   h1, h2 {
     color:#0f606b;
@@ -9,4 +9,25 @@ body {
   }
 
   font-family: 'Roboto', sans-serif;
+}
+
+.btn-block a {
+  color: #0f606b;
+}
+
+.btn-block a:hover {
+  color:white;
+}
+
+.btn-success {
+  color: white;
+  background-color: #f47068;
+  border-color: #f47068;
+  font-family: 'Comfortaa', cursive;;
+}
+
+.btn-success:hover {
+  color: #f47068;
+  background-color: white;
+  border-color: #f47068;
 }
