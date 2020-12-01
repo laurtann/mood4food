@@ -9,12 +9,7 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
-<<<<<<< HEAD
-// const session = require('express-session')
-const cookieSession = require("cookie-session");
-=======
 const cookieSession = require('cookie-session');
->>>>>>> features/orderdb1
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -109,12 +104,8 @@ app.post("/register", (req, res) => {
 
 
 //jpiotrowski0@jigsy.com --> password
-<<<<<<< HEAD
-app.post("/login", (req, res) => {
-=======
 app.post('/login', (req, res) => {
   // cookie
->>>>>>> features/orderdb1
   req.session.userId = 1;
   req.session.orderId = 1;
 
@@ -126,11 +117,6 @@ app.post('/login', (req, res) => {
   });
   res.redirect("/");
 });
-<<<<<<< HEAD
-=======
-
-
->>>>>>> features/orderdb1
 
 app.get("/logout", (req, res) => {
   req.session = null;
