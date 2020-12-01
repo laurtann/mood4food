@@ -23,6 +23,8 @@ const addToOrder = () => {
   return queryArray;
 }
 
+let addFoodToOrder;
+
 $(document).ready(function() {
   $(".plus").click(function() {
     let quantity = $(this).parent().siblings(".qty");
@@ -83,9 +85,11 @@ $(document).ready(function() {
   });
 
   $("#confirm").click(function() {
-    console.log(addToOrder());
+    addFoodToOrder = addToOrder();
   });
 });
+
+module.exports = { addFoodToOrder };
 
 
 
