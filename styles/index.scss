@@ -1,6 +1,6 @@
 .place-order{
   position: sticky;
-  top: 500px;
+  top: 120px;
   height: 40px;
   // border: 2px solid red;
 }
@@ -25,4 +25,40 @@
 td.food-photo img{
   width: 30px;
   height: 30px;
+}
+
+.btn-inc-dec-rem{
+  display: flex;
+  flex-direction: row;
+
+  // border: 2px solid black;
+}
+
+.plus{
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.minus{
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: 0.3em;
+}
+
+.remove{
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: 0.3em;
 }
