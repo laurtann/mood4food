@@ -104,7 +104,8 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/myorders", function (req, res) {
+app.get("/confirm", function (req, res) {
+  let userId = 10;
   console.log("in orders");
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -116,10 +117,11 @@ app.get("/myorders", function (req, res) {
       from: "+12055966681",
       to: "+16473823731",
     })
-    .then((message) =>
-      res.send(
-        `The message was sent to: ${message.to} and delivered sucessfully!`
-      )
+    .then(
+      (message) => res.render("confirmation", { message })
+      // res.send(
+      //   `The message was sent to: ${message.to} and delivered sucessfully!`
+      // )
     );
 });
 
