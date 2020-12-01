@@ -23,6 +23,11 @@ db.connect();
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
 
+//twilio confi
+const http = require("http");
+const MessagingResponse = require("twilio").twiml.MessagingResponse;
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -67,7 +72,6 @@ app.get("/", (req, res) => {
   getAllMenuItems().then((rows) => {
     let userId = req.session && req.session.userId;
     const templateVars = { menuItems: rows, userId };
-    console.log(templateVars);
     res.render("index", templateVars);
   });
 });
@@ -100,11 +104,36 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
-// added for dev - move later
-// app.get("/myorders", (req, res) => {
-//   let userId = req.session.userId;
-//   res.render("myorders", {userId});
-// });
+app.get("/myorders", function (req, res) {
+  console.log("in orders");
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const client = require("twilio")(accountSid, authToken);
+  client.messages
+    .create({
+      body:
+        "Order number 101 has been placed. Please update esimated pickup time.",
+      from: "+12055966681",
+      to: "+16473823731",
+    })
+    .then((message) =>
+      res.send(
+        `The message was sent to: ${message.to} and delivered sucessfully!`
+      )
+    );
+});
+
+app.post("/sms", (req, res) => {
+  const twiml = new MessagingResponse();
+
+  //sms response stored in req.body.Body
+  twiml.message(
+    `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${req.body.Body} minutes.`
+  );
+  console.log(req.body.Body);
+  res.writeHead(200, { "Content-Type": "text/xml" });
+  res.end(twiml.toString());
+});
 
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
