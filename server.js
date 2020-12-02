@@ -32,8 +32,8 @@ const http = require("http");
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const getUser = require("./getPhoneNum.js");
-const { getPhoneNumFromId } = getUser(db);
+// const getUser = require("./getPhoneNum.js");
+// const { getPhoneNumFromId } = getUser(db);
 const  addUser  = require("./3_add_user_details_reg");
 
 // const addOrderToDb = require("./addOrderToDb.js");
@@ -156,7 +156,7 @@ app.post("/registration", (req, res) => {
 //TWILIO - don't touch
 app.get("/confirm", function (req, res) {
   let userId = 10;
-  console.log("in orders");
+
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   //first number is customer, second number is restaurant
@@ -230,8 +230,8 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-// get phoneNum - user on checkout pg
-getPhoneNumFromId().then((rows) => {
-  let userPhoneNumber =  rows.phone_num;
-  return userPhoneNumber;
-});
+// // get phoneNum - user on checkout pg
+// getPhoneNumFromId().then((rows) => {
+//   let userPhoneNumber =  rows.phone_num;
+//   return userPhoneNumber;
+// });
