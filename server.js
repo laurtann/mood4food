@@ -10,6 +10,8 @@ const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
 const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
+
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -24,6 +26,7 @@ const { getAllMenuItems } = dbHelpers(db);
 
 const getUser = require("./1_get_phone_num.js");
 const { getPhoneNumFromId } = getUser(db);
+const  addUser  = require("./3_add_user_details_reg");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -67,7 +70,8 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   getAllMenuItems().then((rows) => {
-    let userId = req.session && req.session.userId;
+    let userId = req.session.userId;
+    console.log(' inside of / page via get request : and user id : -------->   ', userId);
     const templateVars = { menuItems: rows, userId };
     res.render("index", templateVars);
   });
@@ -96,10 +100,33 @@ app.get("/register", (req, res) => {
   res.render("registration", { userId: null });
 });
 
-app.post("/register", (req, res) => {
-  req.session.userId = 1;
-  req.session.orderId = 1;
+app.post("/registration", (req, res) => {
+  const user = req.body;
+  console.log('****** typeof user is : ****  ', typeof user.phone);
+  user.password = bcrypt.hashSync(user.password, 12);
+  // user.phone_num =
+  // const data = $(user).serialize();
+  addUser.addUserDetails(user)
+  .then(user => {
+    if(!user.id) {
+      console.log(' >>>>>>> On absence of users <<<<<<<');
+      res.send({error: "error"});
+      return;
+    }
+
+  // userId = user.id;
+  // res.send("🤗🤗🤗");
+  req.session.userId = user.id;
+
   res.redirect("/");
+    // console.log('------> on line no 103 <-------');
+    // req.session.userId = user.id;
+    // res.send("🤗🤗🤗");
+  })
+    .catch(e => res.send(e));
+
+  // console.log("THIS IS A USER ID ", userId);
+
 });
 
 
