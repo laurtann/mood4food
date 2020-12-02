@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -22,15 +22,15 @@ db.connect();
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
 
-<<<<<<< HEAD
 //twilio confi
 const http = require("http");
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 app.use(bodyParser.urlencoded({ extended: false }));
-=======
+
 const getUser = require("./1_get_phone_num.js");
 const { getPhoneNumFromId } = getUser(db);
->>>>>>> 67c7a896a7cc3477151a13bde6aa4f2f02316c4d
+const getUser = require("./1_get_phone_num.js");
+const { getPhoneNumFromId } = getUser(db);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -150,7 +150,7 @@ app.post("/sms", (req, res) => {
 });
 
 //jpiotrowski0@jigsy.com --> password
-app.post('/login', (req, res) => {
+app.post("/login", (req, res) => {
   // cookie
   req.session.userId = 1;
   req.session.orderId = 1;
@@ -158,7 +158,7 @@ app.post('/login', (req, res) => {
   // get phoneNum
   let userPhoneNumber;
   getPhoneNumFromId().then((rows) => {
-    userPhoneNumber =  rows[0].phone_num;
+    userPhoneNumber = rows[0].phone_num;
     return userPhoneNumber;
   });
   res.redirect("/");
