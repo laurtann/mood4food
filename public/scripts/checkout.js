@@ -118,8 +118,5 @@ $(document).ready(function() {
   });
 });
 
-module.exports = addFoodToDbVals;
-
-
 
 

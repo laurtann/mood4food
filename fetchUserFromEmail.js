@@ -7,19 +7,18 @@ const db = new Pool(dbParams);
 db.connect();
 
 module.exports = (db) => {
-  const getPhoneNumFromId = () => {
+  const fetchUserFromEmail = (email) => {
     return db
       .query(
         `
-      SELECT phone_num from users
-      WHERE users.id = 1;
-      ;`
+      SELECT id from users
+      WHERE users.email = $1;
+      ;`, [email]
       )
       .then((response) => {
         return response.rows[0];
       }).catch(err => null);
   };
 
-  return { getPhoneNumFromId };
+  return { fetchUserFromEmail };
 };
-

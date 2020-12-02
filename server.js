@@ -22,14 +22,16 @@ db.connect();
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
 
+const getUser = require("./getPhoneNum.js");
+const { getPhoneNumFromId } = getUser(db);
+
+const getUserFromEmail = require("./fetchUserFromEmail.js");
+const { fetchUserFromEmail } = getUserFromEmail(db);
 
 //twilio confi
 const http = require("http");
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 app.use(bodyParser.urlencoded({ extended: false }));
-
-const getUser = require("./getPhoneNum.js");
-const { getPhoneNumFromId } = getUser(db);
 
 // const addOrderToDb = require("./addOrderToDb.js");
 
@@ -63,6 +65,7 @@ app.use(
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
+const { promiseImpl } = require("ejs");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -70,29 +73,30 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
+//Generate random number (61-999)
+const generateRandomNumber = () => {
+  const random = Math.floor(Math.random() * 1000) + 61;
+  return random;
+}
+
+//Get Time
+const getTime = () => {
+  const currentdate = new Date();
+  const datetime = currentdate.getHours();
+  return datetime;
+}
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
+  console.log("this is a cookie", req.session.userId);
   getAllMenuItems().then((rows) => {
     let userId = req.session.userId;
-    // time is +4
-    const currentdate = new Date();
-    const datetime = currentdate.getHours();
-    const templateVars = { menuItems: rows, userId, time: datetime };
+    const templateVars = { menuItems: rows, userId, time: getTime() };
     res.render("index", templateVars);
   });
 });
-
-// app.get("/checkout", (req, res) => {
-//   let userId = req.session.userId;
-//   res.render("checkout", { userId });
-// });
-
-// app.post("/checkout", (req, res) => {
-//   addOrderToDb(addFoodToOrder).then((res) =>
-//   console.log("something"));
-// });
 
 // added for dev - move later
 app.get("/login", (req, res) => {
@@ -106,15 +110,19 @@ app.get("/login", (req, res) => {
 
 // added for dev - move later
 app.get("/register", (req, res) => {
-  res.render("registration", { userId: null });
+  if (userId) {
+    res.redirect("/");
+  } else {
+    res.render("registration", { userId: null });
+  }
 });
 
 app.post("/register", (req, res) => {
-  req.session.userId = 1;
-  req.session.orderId = 1;
+  req.session.userId = generateRandomNumber();
   res.redirect("/");
 });
 
+//TWILIO - don't touch
 app.get("/confirm", function (req, res) {
   let userId = 10;
   console.log("in orders");
@@ -155,19 +163,23 @@ app.post("/sms", (req, res) => {
   res.end(twiml.toString());
 });
 
+// END OF TWILIO
+
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
-  // cookie
-  req.session.userId = 1;
-  req.session.orderId = 1;
-  console.log("These are cookies", req.session.userId, req.session.orderId);
+  const { email, password } = req.body;
 
-  // get phoneNum
-  getPhoneNumFromId().then((rows) => {
-    let userPhoneNumber =  rows[0].phone_num;
-    return userPhoneNumber;
-  });
-  res.redirect("/");
+  fetchUserFromEmail(email)
+    .then((row) => {
+      if (!row) {
+        res.send({error: "error"});
+        return;
+      }
+      req.session.userId = row.id;
+      res.redirect("/");
+    }).catch((err) => {
+      res.send(err);
+    });
 });
 
 app.get("/logout", (req, res) => {
@@ -177,4 +189,10 @@ app.get("/logout", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
+});
+
+// get phoneNum - user on checkout pg
+getPhoneNumFromId().then((rows) => {
+  let userPhoneNumber =  rows.phone_num;
+  return userPhoneNumber;
 });

@@ -9,7 +9,7 @@ db.connect();
 const addFoodToDbVals = require("./public/scripts/checkout.js");
 const addFoodToOrder = addFoodToDbVals();
 
-module.exports = (db) => {
+module.exports = () => {
   const addToOrderDb = (addFoodToOrder) => {
     for (let arr of addFoodToOrder) {
       return db
