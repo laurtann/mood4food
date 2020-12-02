@@ -30,8 +30,8 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/checkout.js"></script>
   <script type="text/javascript" src="/scripts/header.js"></script>
+  <script type="text/javascript" src="/scripts/checkout.js"></script>
 </head>
 
 <body>
@@ -40,14 +40,13 @@
   <!-- home page header with restaurant name and welcome message. -->
   <header>
     <div class="jumbotron jumbotron-fluid hero">
-      <h1 class="display-7 hero-text">FAST. FRESH. LOCAL</h1>
+      <h1 class="display-7 hero-text">FRESH EATS & TASTY TREATS</h1>
     </div>
     <div class="container">
-      <h1 class="display-7">Welcome to our Restaurant!</h1>
+      <h1 display-7>Welcome to our Restaurant!</h1>
       <p class="lead">
-        Browse our menu and fill your cart. When you're ready to order,
-        click checkout in the top right corner. We will notify you via sms
-        your order status. Enjoy!
+        Browse our menu and fill your cart. Simply hit checkout and we will notify you of
+        your order status via sms. Enjoy!
       </p>
     </div>
   </header>
@@ -56,41 +55,50 @@
       <div class="row">
         <div class="col col-sm-8">
           <section class="order-info">
-            <h2>Your Cart</h2>
+            <% if (time < 14) { %>
+              <h2>What's for <strong>Breakfast</strong>?</h2>
+            <% } else if (time > 14 && time < 9) { %>
+              <h2>What's for <strong>Lunch</strong>?</h2>
+            <% } else { %>
+                <h2>What's for <strong>Dinner</strong>?</h2>
+            <% } %>
             <div class="row justify-content-center">
               <div class="col-auto">
                 <table class="table table-responsive">
                   <thead class="thead-light">
                     <tr>
                       <th scope="col" id="hide-food-id">Food ID</th>
-                      <th scope="col">Image</th>
-                      <th scope="col">Name</th>
+                      <th scope="col"></th>
+                      <th scope="col">Expand to Read More!</th>
                       <th scope="col">Cost</th>
-                      <th scope="col">Description</th>
                       <th scope="col">Quantity</th>
                       <th scope="col">Item Total</th>
                       <th scope="col">Add to Cart</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% for(const food of menuItems) { %>
-                      <tr class="food-row">
-                        <td class="hide food-id"><%= food.id %></td>
-                        <td class='food-photo'>
-                          <img src="<%= food.food_photo_url %>" />
-                        </td>
-                        <td class="food-name"><%= food.name %></td>
-                        <td class="item-cost">$<%= food.cost %></td>
-                        <td class="food-description"><%= food.description %></td>
-                        <td class="qty">0</td>
-                        <td class="item-total">$0</td>
-                        <td class="edit-cart">
-                          <button type="button" class="btn btn-success plus">+</button>
-                          <button type="button" class="btn btn-success minus">-</button>
-                          <button type="button" class="btn btn-success remove">x</button>
-                        </td>
-                      </tr>
-                      <% } %>
+                  <% for(const food of menuItems) { %>
+                    <tr class="food-row">
+                      <td class="hide food-id"><%= food.id %></td>
+                      <td class='food-photo'>
+                        <img src="<%= food.food_photo_url %>" />
+                      </td>
+                      <td class="food-name">
+                        <button type="button" class="collapsible"><%= food.name %> <i class="fas fa-arrow-down"></i></button>
+                        <div class="content">
+                          <p><%= food.description %></p>
+                        </div>
+                      </td>
+                      <td class="item-cost">$<%= food.cost %></td>
+                      <td class="qty">0</td>
+                      <td class="item-total">$0</td>
+                      <td class="edit-cart">
+                        <button type="button" class="btn btn-success plus">+</button>
+                        <button type="button" class="btn btn-success minus">-</button>
+                        <button type="button" class="btn btn-success remove">x</button>
+                      </td>
+                    </tr>
+                    <% } %>
                     </table>
               </div>
             </div>
@@ -98,13 +106,8 @@
         </div>
         <div class="col col-sm-4">
           <section class="place-order">
-            <h2 id="checkout">Place Your Order</h2>
+            <h2 id="checkout"><strong>Place Your Order</strong></h2>
             <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Total</th>
-                </tr>
-              </thead>
               <tbody>
                 <tr>
                   <th scope="row">Item Total</th>
@@ -118,10 +121,18 @@
                   <th scope="row">Grand Total</th>
                   <td class="order-grand-total">$0</td>
                 </tr>
+                <tr>
+                  <th scope="row">Order Notes</th>
+                  <td class="order-notes">
+                    <form action = "">
+                      <textarea name="text" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
+                    </form>
+                  </td>
+                </tr>
               </tbody>
             </table>
             <form action="/confirm" method="get">
-              <button type="submit" class="btn btn-success" id="confirm">Confirm</button>
+              <button type="submit" class="btn btn-success" id="confirm">I'm Ready! Confirm Order</button>
             </form>
           </section>
         </div>

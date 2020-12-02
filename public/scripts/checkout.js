@@ -35,18 +35,28 @@ const addToCart = () => {
   return queryArray;
 }
 
-// const addToCart = () => {
-//   const foodItem =
-//   `
-//   <p>Name: ${}, Quanity: ${}, Price/Item: ${}<p/>
-//   `
-//   return foodItem;
-// }
+// adapted from w3c
+const toggleDescription = () => {
+  var coll = document.getElementsByClassName("collapsible");
+  let i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      let content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+}
 
 let addFoodToOrder;
 $(document).ready(function() {
 
-
+  toggleDescription();
   $(".plus").click(function() {
     let quantity = $(this).parent().siblings(".qty");
     let quantityValue = parseInt($(quantity).text());

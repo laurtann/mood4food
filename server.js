@@ -76,7 +76,10 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.get("/", (req, res) => {
   getAllMenuItems().then((rows) => {
     let userId = req.session.userId;
-    const templateVars = { menuItems: rows, userId };
+    // time is +4
+    const currentdate = new Date();
+    const datetime = currentdate.getHours();
+    const templateVars = { menuItems: rows, userId, time: datetime };
     res.render("index", templateVars);
   });
 });
@@ -157,6 +160,7 @@ app.post("/login", (req, res) => {
   // cookie
   req.session.userId = 1;
   req.session.orderId = 1;
+  console.log("These are cookies", req.session.userId, req.session.orderId);
 
   // get phoneNum
   getPhoneNumFromId().then((rows) => {
