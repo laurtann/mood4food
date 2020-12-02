@@ -16,8 +16,9 @@
 .hero-text {
   display: flex;
   color: #fafbf5;
-  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
   font-size: 3em;
+  font-weight: 900;
   justify-content: center;
   align-content: center;
 }
@@ -96,4 +97,12 @@ td .active, .collapsible:hover {
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+}
+
+.order-notes textarea{
+  width: 100%
+}
+
+main {
+  padding-top: 1em;
 }
