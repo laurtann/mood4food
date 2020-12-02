@@ -93,7 +93,7 @@
                       <td class="qty">0</td>
                       <td class="item-total">$0</td>
                       <td class="edit-cart">
-                        <button type="button" class="btn btn-success plus">+</button>
+                        <button type="button" id="plus" class="btn btn-success plus">+</button>
                         <button type="button" class="btn btn-success minus">-</button>
                         <button type="button" class="btn btn-success remove">x</button>
                       </td>
@@ -119,19 +119,17 @@
                 </tr>
                 <tr>
                   <th scope="row">Grand Total</th>
-                  <td class="order-grand-total">$0</td>
+                  <td id="order-grand-total">$0</td>
                 </tr>
                 <tr>
+            <form action="/confirm" method="get">
                   <th scope="row">Order Notes</th>
                   <td class="order-notes">
-                    <form action = "">
-                      <textarea name="text" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
-                    </form>
+                    <textarea id="text-notes" name="notes" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <form action="/confirm" method="get">
               <button type="submit" class="btn btn-success" id="confirm">I'm Ready! Confirm Order</button>
             </form>
           </section>
