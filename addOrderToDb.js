@@ -6,21 +6,23 @@ const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
-const addFoodToOrder = require("./public/scripts/checkout.js");
+const addFoodToDbVals = require("./public/scripts/checkout.js");
+const addFoodToOrder = addFoodToDbVals();
 
 module.exports = (db) => {
   const addToOrderDb = (addFoodToOrder) => {
     for (let arr of addFoodToOrder) {
-    return db
-      .query(
-      `
-      INSERT INTO orders
-      VALUES ($1, $2, $3, $4, $5);
-      `, [arr[0], arr[1], arr[2], arr[3], arr[4]]
-      )
-      .then(res => res.rows[0])
-      .catch(err => null);
-    }
+      return db
+        .query(
+        `
+        INSERT INTO orders
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *;
+        `, [arr[0], arr[1], arr[2], arr[3], arr[4]]
+        )
+        .then(res => res.rows[0])
+        .catch(err => null);
+      }
   };
 
   return { addToOrderDb };
