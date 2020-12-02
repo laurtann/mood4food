@@ -104,17 +104,20 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/confirm", function (req, res) {
+app.post("/confirm", function (req, res) {
   let userId = 10;
+  console.log("req.body ====", req.body);
+  console.log("res.body ====", res.body);
+  console.log("req.body.text ====", req.body.orderNotes);
   console.log("in orders");
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   //first number is customer, second number is restaurant
-  const numbers = ["+14169869248", "+16473823731"];
+  const numbers = ["", "+16473823731"];
   const client = require("twilio")(accountSid, authToken);
 
   numbers.forEach(async (number) => {
-    const message = await client.messages
+    client.messages
       .create({
         body:
           "The order has been sucessfully placed. Delivery time will be updated shortly.",
@@ -123,7 +126,8 @@ app.get("/confirm", function (req, res) {
       })
       .then((message) => {
         res.render("confirmation", { message: message });
-      });
+      })
+      .catch((err) => console.log("error: ", err));
   });
 });
 
@@ -144,17 +148,7 @@ app.post("/sms", (req, res) => {
   res.end(twiml.toString());
 });
 
+
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
   req.session.userId = 1;
-  res.redirect("/");
-});
-
-app.get("/logout", (req, res) => {
-  req.session = null;
-  res.redirect("/");
-});
-
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});
