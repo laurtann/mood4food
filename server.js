@@ -109,6 +109,7 @@ app.get("/confirm", function (req, res) {
   console.log("in orders");
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
+  //first number is customer, second number is restaurant
   const numbers = ["+14169869248", "+16473823731"];
   const client = require("twilio")(accountSid, authToken);
 
@@ -126,6 +127,10 @@ app.get("/confirm", function (req, res) {
   });
 });
 
+const updateOrderTime = function (orderTime) {
+  console.log("Updated order time: ", orderTime);
+};
+
 app.post("/sms", (req, res) => {
   const twiml = new MessagingResponse();
   console.log("in confirmation");
@@ -134,6 +139,7 @@ app.post("/sms", (req, res) => {
   twiml.message(
     `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${orderTime} minutes.`
   );
+  updateOrderTime(orderTime);
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 });
