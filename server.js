@@ -9,7 +9,9 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
-const cookieSession = require("cookie-session");
+
+const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -29,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const getUser = require("./getPhoneNum.js");
 const { getPhoneNumFromId } = getUser(db);
+const  addUser  = require("./3_add_user_details_reg");
 
 // const addOrderToDb = require("./addOrderToDb.js");
 
@@ -79,6 +82,8 @@ app.get("/", (req, res) => {
     const currentdate = new Date();
     const datetime = currentdate.getHours();
     const templateVars = { menuItems: rows, userId, time: datetime };
+    console.log(' inside of / page via get request : and user id : -------->   ', userId);
+    const templateVars = { menuItems: rows, userId };
     res.render("index", templateVars);
   });
 });
@@ -108,10 +113,33 @@ app.get("/register", (req, res) => {
   res.render("registration", { userId: null });
 });
 
-app.post("/register", (req, res) => {
-  req.session.userId = 1;
-  req.session.orderId = 1;
+app.post("/registration", (req, res) => {
+  const user = req.body;
+  console.log('****** typeof user is : ****  ', typeof user.phone);
+  user.password = bcrypt.hashSync(user.password, 12);
+  // user.phone_num =
+  // const data = $(user).serialize();
+  addUser.addUserDetails(user)
+  .then(user => {
+    if(!user.id) {
+      console.log(' >>>>>>> On absence of users <<<<<<<');
+      res.send({error: "error"});
+      return;
+    }
+
+  // userId = user.id;
+  // res.send("🤗🤗🤗");
+  req.session.userId = user.id;
+
   res.redirect("/");
+    // console.log('------> on line no 103 <-------');
+    // req.session.userId = user.id;
+    // res.send("🤗🤗🤗");
+  })
+    .catch(e => res.send(e));
+
+  // console.log("THIS IS A USER ID ", userId);
+
 });
 
 app.get("/confirm", function (req, res) {
