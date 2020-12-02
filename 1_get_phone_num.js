@@ -7,17 +7,19 @@ const db = new Pool(dbParams);
 db.connect();
 
 module.exports = (db) => {
-  const getAllMenuItems = () => {
+  const getPhoneNumFromId = () => {
     return db
       .query(
         `
-      SELECT * from food_items;`
+      SELECT phone_num from users
+      WHERE users.id = 1;
+      ;`
       )
       .then((response) => {
         return response.rows;
       });
   };
 
-  return { getAllMenuItems };
+  return { getPhoneNumFromId };
 };
 
