@@ -83,7 +83,7 @@ app.get("/", (req, res) => {
     const datetime = currentdate.getHours();
     const templateVars = { menuItems: rows, userId, time: datetime };
     console.log(' inside of / page via get request : and user id : -------->   ', userId);
-    const templateVars = { menuItems: rows, userId };
+    // const templateVars = { menuItems: rows, userId };
     res.render("index", templateVars);
   });
 });
