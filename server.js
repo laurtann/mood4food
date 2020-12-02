@@ -22,7 +22,6 @@ db.connect();
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
 
-
 //twilio confi
 const http = require("http");
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
@@ -140,6 +139,14 @@ app.get("/confirm", function (req, res) {
 
 const updateOrderTime = function (orderTime) {
   console.log("Updated order time: ", orderTime);
+
+  if (!orderTime) {
+    $("#error").hide();
+    return true;
+  } else {
+    $("#error").show();
+    return false;
+  }
 };
 
 app.post("/sms", (req, res) => {
@@ -164,7 +171,7 @@ app.post("/login", (req, res) => {
 
   // get phoneNum
   getPhoneNumFromId().then((rows) => {
-    let userPhoneNumber =  rows[0].phone_num;
+    let userPhoneNumber = rows[0].phone_num;
     return userPhoneNumber;
   });
   res.redirect("/");
