@@ -23,6 +23,13 @@ const addToOrder = () => {
   return queryArray;
 }
 
+const addToCart = () => {
+  const newItem =
+  `
+  <p>${}</p>
+  `
+}
+
 let addFoodToOrder;
 
 $(document).ready(function() {
