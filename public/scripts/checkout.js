@@ -21,20 +21,6 @@ const addToOrder = () => {
   return queryArray;
 }
 
-let queryObj = {};
-const addToCart = () => {
-
-  const foodId = document.getElementsByClassName("food-name");
-  const foodQty = document.getElementsByClassName("qty");
-
-  for (let i = 0; i < foodQty.length; i++) {
-    if (foodQty[i].innerText !== "0") {
-      queryArray.push([1, 1, Number(foodId[i].innerText), Number(foodQty[i].innerText), "ip"]);
-    }
-  }
-  return queryArray;
-}
-
 // adapted from w3c
 const toggleDescription = () => {
   var coll = document.getElementsByClassName("collapsible");
@@ -53,7 +39,14 @@ const toggleDescription = () => {
   }
 }
 
+//Will hold arr of arr of order inserts
 let addFoodToOrder;
+
+// allows us to access outside of the jq
+const addFoodToDbVals = () => {
+  return addFoodToOrder;
+}
+
 $(document).ready(function() {
 
   toggleDescription();
@@ -77,6 +70,10 @@ $(document).ready(function() {
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
     $(".order-grand-total").text("$" + grandTotal.toFixed(2));
+
+    // test
+    addFoodToOrder = addToOrder();
+    addFoodToDbVals();
   });
 
   $(".minus").click(function() {
@@ -117,12 +114,9 @@ $(document).ready(function() {
 
   $("#confirm").click(function() {
     addFoodToOrder = addToOrder();
-    console.log(addFoodToOrder);
+    addFoodToDbVals();
   });
 });
-
-// module.exports = { addFoodToOrder };
-
 
 
 
