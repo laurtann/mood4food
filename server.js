@@ -116,9 +116,8 @@ app.post("/register", (req, res) => {
 
 app.post("/confirm", function (req, res) {
   let userId = 10;
-  console.log("req.body ====", req.body);
-  console.log("res.body ====", res.body);
-  console.log("req.body.text ====", req.body.orderNotes);
+  const orderNotes = req.body.orderNotes;
+  console.log("req.body.text ====", orderNotes);
   console.log("in orders");
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -129,8 +128,7 @@ app.post("/confirm", function (req, res) {
   numbers.forEach(async (number) => {
     client.messages
       .create({
-        body:
-          "The order has been sucessfully placed. Delivery time will be updated shortly.",
+        body: `The order has been sucessfully placed. Special notes: "${orderNotes}".  Delivery time will be updated shortly.`,
         from: "+12055966681",
         to: number,
       })
