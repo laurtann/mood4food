@@ -123,12 +123,15 @@ app.get("/confirm", function (req, res) {
 app.post("/sms", (req, res) => {
   const twiml = new MessagingResponse();
   console.log("in confirmation");
+  const orderTime = req.body.Body;
   //sms response stored in req.body.Body
   twiml.message(
-    `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${req.body.Body} minutes.`
+    `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${orderTime} minutes.`
   );
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
+
+  res.render("/confirm", { orderTime: orderTime });
 });
 
 //jpiotrowski0@jigsy.com --> password
