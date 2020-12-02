@@ -120,17 +120,17 @@ app.get("/confirm", function (req, res) {
     .then((message) => res.render("confirmation", { message: message }));
 });
 
-app.post("/confirm", (req, res) => {
+app.post("/sms", (req, res) => {
   const twiml = new MessagingResponse();
   console.log("in confirmation");
   //sms response stored in req.body.Body
   twiml.message(
     `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${req.body.Body} minutes.`
   );
-
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 });
+
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
   req.session.userId = 1;
