@@ -10,8 +10,8 @@ const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
 
-const cookieSession = require('cookie-session');
-const bcrypt = require('bcrypt');
+const cookieSession = require("cookie-session");
+const bcrypt = require("bcrypt");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -34,8 +34,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const getUser = require("./getPhoneNum.js");
 const { getPhoneNumFromId } = getUser(db);
-const  addUser  = require("./3_add_user_details_reg");
-const  verifyUserCreds  = require("./4_match_login_creds_post");
+const addUser = require("./3_add_user_details_reg");
+const verifyUserCreds = require("./4_match_login_creds_post");
 
 // const addOrderToDb = require("./addOrderToDb.js");
 
@@ -81,14 +81,14 @@ app.use("/api/widgets", widgetsRoutes(db));
 const generateRandomNumber = () => {
   const random = Math.floor(Math.random() * 1000) + 61;
   return random;
-}
+};
 
 //Get Time
 const getTime = () => {
   const currentdate = new Date();
   const datetime = currentdate.getHours();
   return datetime;
-}
+};
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -127,34 +127,38 @@ app.get("/register", (req, res) => {
 
 app.post("/registration", (req, res) => {
   const user = req.body;
-  console.log('****** typeof user is : ****  ', typeof user.phone);
+  console.log("****** typeof user is : ****  ", typeof user.phone);
   user.password = bcrypt.hashSync(user.password, 12);
-  console.log('user pwd in registeration  : ',user.password);
-  addUser.addUserDetails(user)
-  .then(user => {
-    if(!user.id) {
-      console.log(' >>>>>>> On absence of users <<<<<<<');
-      res.send({error: "error"});
-      return;
-    }
-  req.session.userId = user.id;
-  res.redirect("/");
-  })
-    .catch(e => res.send(e));
+  console.log("user pwd in registeration  : ", user.password);
+  addUser
+    .addUserDetails(user)
+    .then((user) => {
+      if (!user.id) {
+        console.log(" >>>>>>> On absence of users <<<<<<<");
+        res.send({ error: "error" });
+        return;
+      }
+      req.session.userId = user.id;
+      res.redirect("/");
+    })
+    .catch((e) => res.send(e));
 });
 
 //TWILIO - don't touch
-app.get("/confirm", function (req, res) {
+app.post("/confirm", function (req, res) {
   let userId = 10;
+  console.log("req.body ====", req.body);
+  console.log("res.body ====", res.body);
+  console.log("req.body.text ====", req.body.orderNotes);
   console.log("in orders");
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   //first number is customer, second number is restaurant
-  const numbers = ["+14169869248", "+16473823731"];
+  const numbers = ["", "+16473823731"];
   const client = require("twilio")(accountSid, authToken);
 
   numbers.forEach(async (number) => {
-    const message = await client.messages
+    client.messages
       .create({
         body:
           "The order has been sucessfully placed. Delivery time will be updated shortly.",
@@ -163,20 +167,13 @@ app.get("/confirm", function (req, res) {
       })
       .then((message) => {
         res.render("confirmation", { message: message });
-      });
+      })
+      .catch((err) => console.log("error: ", err));
   });
 });
 
 const updateOrderTime = function (orderTime) {
   console.log("Updated order time: ", orderTime);
-
-  if (!orderTime) {
-    $("#error").hide();
-    return true;
-  } else {
-    $("#error").show();
-    return false;
-  }
 };
 
 app.post("/sms", (req, res) => {
@@ -197,21 +194,21 @@ app.post("/sms", (req, res) => {
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
   const user = req.body;
-  console.log('user pwd in login  : ',user.password);
-  console.log('000 202 ----> ', verifyUserCreds);
-  verifyUserCreds.fetchUserDetails(user)
-  .then(userId => {
-
-    console.log('user values on server,js : ',userId);
-    if(!userId) {
-      console.log(' >>>>>>> On absence of users <<<<<<<');
-      res.send({error: "error"});
-      return;
-    }
-  req.session.userId = userId;
-  res.redirect("/");
-  })
-    .catch(e => res.send(e));
+  console.log("user pwd in login  : ", user.password);
+  console.log("000 202 ----> ", verifyUserCreds);
+  verifyUserCreds
+    .fetchUserDetails(user)
+    .then((userId) => {
+      console.log("user values on server,js : ", userId);
+      if (!userId) {
+        console.log(" >>>>>>> On absence of users <<<<<<<");
+        res.send({ error: "error" });
+        return;
+      }
+      req.session.userId = userId;
+      res.redirect("/");
+    })
+    .catch((e) => res.send(e));
 });
 
 app.get("/logout", (req, res) => {
@@ -225,6 +222,6 @@ app.listen(PORT, () => {
 
 // get phoneNum - user on checkout pg
 getPhoneNumFromId().then((rows) => {
-  let userPhoneNumber =  rows.phone_num;
+  let userPhoneNumber = rows.phone_num;
   return userPhoneNumber;
 });
