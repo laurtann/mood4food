@@ -25,6 +25,8 @@ const { getAllMenuItems } = dbHelpers(db);
 const getUser = require("./getPhoneNum.js");
 const { getPhoneNumFromId } = getUser(db);
 
+// const addOrderToDb = require("./addOrderToDb.js");
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -67,17 +69,21 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   getAllMenuItems().then((rows) => {
-    let userId = req.session && req.session.userId;
+    let userId = req.session.userId;
     const templateVars = { menuItems: rows, userId };
     res.render("index", templateVars);
   });
 });
 
-// added for dev - move later
-app.get("/checkout", (req, res) => {
-  let userId = req.session && req.session.userId;
-  res.render("checkout", { userId });
-});
+// app.get("/checkout", (req, res) => {
+//   let userId = req.session.userId;
+//   res.render("checkout", { userId });
+// });
+
+// app.post("/checkout", (req, res) => {
+//   addOrderToDb(addFoodToOrder).then((res) =>
+//   console.log("something"));
+// });
 
 // added for dev - move later
 app.get("/login", (req, res) => {
@@ -91,8 +97,6 @@ app.get("/login", (req, res) => {
 
 // added for dev - move later
 app.get("/register", (req, res) => {
-  // req.session['order_id'] = 123;
-  // let userId = req.session.userId;
   res.render("registration", { userId: null });
 });
 
@@ -110,9 +114,8 @@ app.post('/login', (req, res) => {
   req.session.orderId = 1;
 
   // get phoneNum
-  let userPhoneNumber;
   getPhoneNumFromId().then((rows) => {
-    userPhoneNumber =  rows[0].phone_num;
+    let userPhoneNumber =  rows[0].phone_num;
     return userPhoneNumber;
   });
   res.redirect("/");
