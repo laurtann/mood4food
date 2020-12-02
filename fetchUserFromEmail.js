@@ -11,7 +11,7 @@ module.exports = (db) => {
     return db
       .query(
         `
-      SELECT id from users
+      SELECT id, password from users
       WHERE users.email = $1;
       ;`, [email]
       )
