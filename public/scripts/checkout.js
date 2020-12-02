@@ -35,13 +35,13 @@ const addToCart = () => {
   return queryArray;
 }
 
-const addToCart = () => {
-  const foodItem =
-  `
-  <p>Name: ${}, Quanity: ${}, Price/Item: ${}<p/>
-  `
-  return foodItem;
-}
+// const addToCart = () => {
+//   const foodItem =
+//   `
+//   <p>Name: ${}, Quanity: ${}, Price/Item: ${}<p/>
+//   `
+//   return foodItem;
+// }
 
 let addFoodToOrder;
 $(document).ready(function() {
