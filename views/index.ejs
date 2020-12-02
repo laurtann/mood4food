@@ -124,14 +124,13 @@
                 <tr>
                   <th scope="row">Order Notes</th>
                   <td class="order-notes">
-                    <form action = "">
                       <textarea name="text" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
-                    </form>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <form action="/confirm" method="get">
+            <form action="/confirm" method="POST">
+              <textarea name="orderNotes" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
               <button type="submit" class="btn btn-success" id="confirm">I'm Ready! Confirm Order</button>
             </form>
           </section>
