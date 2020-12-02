@@ -108,20 +108,20 @@
               <tbody>
                 <tr>
                   <th scope="row">Item Total</th>
-                  <td class="order-total"></td>
+                  <td class="order-total">$0</td>
                 </tr>
                 <tr>
                   <th scope="row">HST/GST</th>
-                  <td class="order-tax"></td>
+                  <td class="order-tax">$0</td>
                 </tr>
                 <tr>
                   <th scope="row">Grand Total</th>
-                  <td class="order-grand-total"></td>
+                  <td class="order-grand-total">$0</td>
                 </tr>
               </tbody>
             </table>
-            <form>
-              <button type="button" class="btn btn-success" id="confirm">Confirm</button>
+            <form action="/checkout" method="POST">
+              <button type="submit" class="btn btn-success" id="confirm">Confirm</button>
             </form>
           </section>
         </div>

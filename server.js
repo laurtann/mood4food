@@ -22,7 +22,7 @@ db.connect();
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
 
-const getUser = require("./1_get_phone_num.js");
+const getUser = require("./getPhoneNum.js");
 const { getPhoneNumFromId } = getUser(db);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
