@@ -1,3 +1,11 @@
+// Node.js style require
+// const axios = require("axios");
+
+let foodNames = document.getElementsByClassName("food-name");
+let qty = document.getElementsByClassName("qty");
+let grandTotal = document.getElementsByClassName("grand-total").innerText;
+// let orderNotes = document.getElementById("text-notes").innerText;
+
 const updateCartTotal = () => {
   let itemTotals = document.getElementsByClassName("item-total");
   let total = 0;
@@ -8,6 +16,31 @@ const updateCartTotal = () => {
   return total;
 }
 
+
+//This works
+let checkout = document.getElementById("confirm");
+
+checkout.onclick = function() {
+  console.log("working");
+}
+
+// const nameAndQuantity = () => {
+//   let orderArray = [];
+//   for (let i = 0; i < qty.length; i++) {
+//     if (Number(qty[i].innerText) !== 0) {
+//       orderArray.push(`${foodNames[i].innerText}: ${qty[i].innerText}; `);
+//     }
+//   }
+//   // console.log(orderArray.join(""));
+//   // return(orderArray.join(""));
+//   console.log(document.getElementById("order-grand-total").innerText);
+// };
+
+const generateRandomNumber = () => {
+  const random = Math.floor(Math.random() * 1000) + 61;
+  return random;
+};
+
 const addToOrder = () => {
   queryArray = [];
   const foodId = document.getElementsByClassName("food-id");
@@ -15,7 +48,7 @@ const addToOrder = () => {
 
   for (let i = 0; i < foodQty.length; i++) {
     if (Number(foodQty[i].innerText) !== 0) {
-      queryArray.push([1, 1, Number(foodId[i].innerText), Number(foodQty[i].innerText), "ip"]);
+      queryArray.push([1, generateRandomNumber(), Number(foodId[i].innerText), Number(foodQty[i].innerText), "ip"]);
     }
   }
   return queryArray;
@@ -23,7 +56,7 @@ const addToOrder = () => {
 
 // adapted from w3c
 const toggleDescription = () => {
-  var coll = document.getElementsByClassName("collapsible");
+  let coll = document.getElementsByClassName("collapsible");
   let i;
 
   for (i = 0; i < coll.length; i++) {
@@ -44,7 +77,7 @@ let addFoodToOrder;
 
 // allows us to access outside of the jq
 const addFoodToDbVals = () => {
-  return addFoodToOrder;
+  console.log(addFoodToOrder);
 }
 
 $(document).ready(function() {
@@ -69,11 +102,21 @@ $(document).ready(function() {
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
-    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
+    $("#order-grand-total").text("$" + grandTotal.toFixed(2));
 
     // test
-    addFoodToOrder = addToOrder();
-    addFoodToDbVals();
+    // console.log(nameAndQuantity());
+
+    // const getData = () => {
+    //   axios.get('/').then(response =>
+    //     console.log(response));
+    // };
+
+    // getData();
+
+  //   // test
+  //   addFoodToOrder = addToOrder();
+  //   addFoodToDbVals();
   });
 
   $(".minus").click(function() {
@@ -95,7 +138,7 @@ $(document).ready(function() {
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
-    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
+    $("#order-grand-total").text("$" + grandTotal.toFixed(2));
   });
 
   $(".remove").click(function() {
@@ -109,14 +152,13 @@ $(document).ready(function() {
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
-    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
+    $("#order-grand-total").text("$" + grandTotal.toFixed(2));
   });
 
-  $("#confirm").click(function() {
-    addFoodToOrder = addToOrder();
-    addFoodToDbVals();
+  // $("#confirm").click(function() {
+  //   addFoodToOrder = addToOrder();
+  //   // addFoodToDbVals();
   });
-});
 
 
 
