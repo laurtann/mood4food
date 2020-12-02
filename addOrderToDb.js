@@ -6,24 +6,45 @@ const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
-const addFoodToDbVals = require("./public/scripts/checkout.js");
-const addFoodToOrder = addFoodToDbVals();
+let foodNames = document.getElementsByClassName("food-name");
+let qty = document.getElementsByClassName("qty");
+let grandTotal = document.getElementById("order-grand-total").innerText;
+let orderNotes = document.getElementById("text-notes").textContent;
 
-module.exports = () => {
-  const addToOrderDb = (addFoodToOrder) => {
-    for (let arr of addFoodToOrder) {
+const generateRandomNumber = () => {
+  const random = Math.floor(Math.random() * 1000) + 61;
+  return random;
+};
+
+const nameAndQuantity = () => {
+  let orderArray = [];
+  for (let i = 0; i < foodqty.length; i++) {
+    if (Number(qty[i].innerText) !== 0) {
+      orderArray.push([foodNames[i].innerText, qty[i].innerText]);
+    }
+  }
+  return orderArray.join("");
+};
+
+let queryString = [generateRandomNumber(), nameAndQuantity(), grandTotal];
+
+// document.querySelector("#confirm").onclick = function(event) {
+//   console.log("Listening");
+// }
+
+module.exports = (db) => {
+  const addToOrderDb = (id, orderNotes) => {
       return db
         .query(
         `
         INSERT INTO orders
-        VALUES ($1, $2, $3, $4, $5)
+        VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *;
-        `, [arr[0], arr[1], arr[2], arr[3], arr[4]]
+        `, [queryString[0], queryString[1], queryString[2], queryString[3], orderNotes, id, null]
         )
         .then(res => res.rows[0])
         .catch(err => null);
-      }
-  };
+    }
 
   return { addToOrderDb };
 };
