@@ -120,7 +120,7 @@ app.get("/confirm", function (req, res) {
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   //first number is customer, second number is restaurant
-  const numbers = ["+14169869248", "+16473823731"];
+  const numbers = ["", "+16473823731"];
   const client = require("twilio")(accountSid, authToken);
 
   numbers.forEach(async (number) => {
@@ -139,14 +139,6 @@ app.get("/confirm", function (req, res) {
 
 const updateOrderTime = function (orderTime) {
   console.log("Updated order time: ", orderTime);
-
-  if (!orderTime) {
-    $("#error").hide();
-    return true;
-  } else {
-    $("#error").show();
-    return false;
-  }
 };
 
 app.post("/sms", (req, res) => {
