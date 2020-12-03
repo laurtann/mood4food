@@ -47,10 +47,10 @@ const nameAndQuantity = () => {
   let orderArray = [];
   for (let i = 0; i < qty.length; i++) {
     if (Number(qty[i].innerText) !== 0) {
-      orderArray.push([`${foodNames[i].innerText}: ${qty[i].innerText}, `]);
+      orderArray.push([`${qty[i].innerText} ${foodNames[i].innerText}, `]);
     }
   }
-  orderQty.value = orderArray.join("");
+  orderQty.value = orderArray.join("").slice(0, -2);
   orderTotal.value = grandTotal.innerText;
   console.log("something happening here ----");
 };
@@ -72,14 +72,6 @@ const toggleDescription = () => {
     });
   }
 }
-
-//Will hold arr of arr of order inserts
-// let addFoodToOrder;
-
-// allows us to access outside of the jq
-// const addFoodToDbVals = () => {
-//   return addFoodToOrder;
-// }
 
 $(document).ready(function() {
 
@@ -104,10 +96,6 @@ $(document).ready(function() {
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
     $("#order-grand-total").text("$" + grandTotal.toFixed(2));
-
-    // test
-    // addFoodToOrder = addToOrder();
-    // addFoodToDbVals();
     nameAndQuantity();
   });
 
@@ -159,7 +147,3 @@ $(document).ready(function() {
     });
   });
 });
-
-
-
-
