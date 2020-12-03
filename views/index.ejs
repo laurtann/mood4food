@@ -23,9 +23,9 @@
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
   <link rel="stylesheet" href="/styles/checkout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/index.css" type="text/css" />
 
@@ -129,7 +129,7 @@
                 </tr>
               </tbody>
             </table>
-            <div class="checkout-form"></div>
+            <div class="checkout-form">
               <form action="/confirm" method="POST">
 
                 <textarea class="order-notes" name="orderNotes" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
@@ -138,6 +138,7 @@
                 <textarea name="orderTotal" class="hide" id="order-total"></textarea>
 
               </form>
+            </div>
             </div>
           </section>
         </div>
