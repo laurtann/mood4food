@@ -40,7 +40,6 @@ const getUser = require("./getPhoneNum.js");
 const { getPhoneNumFromId } = getUser(db);
 const addUser = require("./3_add_user_details_reg");
 const verifyUserCreds = require("./4_match_login_creds_post");
-const checkExistingEmailId = require("./5_check_existing_email_reg");
 
 // const addOrderToDb = require("./addOrderToDb.js");
 
@@ -100,12 +99,9 @@ const getTime = () => {
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  console.log("this is a cookie", req.session.userId);
   getAllMenuItems().then((rows) => {
     let userId = req.session.userId;
     // time is +4
-    const currentdate = new Date();
-    const datetime = currentdate.getHours();
     const templateVars = { menuItems: rows, userId, time: getTime() };
     res.render("index", templateVars);
   });
@@ -133,59 +129,23 @@ app.get("/register", (req, res) => {
 
 app.post("/registration", (req, res) => {
   const user = req.body;
-  console.log('  user details --->>>> ', user);
-  // when password and confirm password are not matching exactly
-  if (user.password !== user.confirm_password) {
-    res.send(`<html><body><div><p>Hi, You password and confirm password field doesn't match.
-      Unfortunately you can't have the right to move ahead on this.
-      </p>Please go back to your <a href="/register">registeration</a> page or click home
-      <a href="/">🏡</a> </div></body></html>\n`);
-    return;
-  }
-  // when user email id already exists in the system
-  checkExistingEmailId
-    .fetchEmailId(user.email)
-    .then((email) => {
-      console.log('inside of if block for fetchEmailId and returned email form db is : ', email);
-      if (email) {
-        console.log(" >>>>>>> On presence of email match <<<<<<<");
-        res.send(`<html><body><div><p>Hi, Your provided email is already existing.
-        Unfortunately you can't have the right to move ahead on this.
-        </p>Please go back to your <a href="/register">registration</a> page or click home
-        <a href="/">🏡</a> </div></body></html>\n`);
+  user.password = bcrypt.hashSync(user.password, 12);
+  console.log("user pwd in registeration  : ", user.password);
+  addUser
+    .addUserDetails(user)
+    .then((user) => {
+      if (!user.id) {
+        console.log(" >>>>>>> On absence of users <<<<<<<");
+        res.send({ error: "error" });
         return;
       }
+      req.session.userId = user.id;
+      res.redirect("/");
     })
-    // .catch ((e) => res.send(e));
-
-      user.password = bcrypt.hashSync(user.password, 12);
-      addUser
-        .addUserDetails(user)
-        .then((user) => {
-          if (!user.id) {
-            console.log(" >>>>>>> On absence of users <<<<<<<");
-            res.send({ error: "error" });
-            return;
-          }
-          req.session.userId = user.id;
-          res.redirect("/");
-        })
-        .catch((e) => res.send(e));
-
+    .catch((e) => res.send(e));
 });
 
-//This works
 
-// // event listener for the click on checkout
-// checkout.onclick = function() {
-//   // console.log("working");
-//   // orderNotes from text area
-//   addOrderToDbVar.addOrderToDb(orderNotes, req.session.userId)
-//     .then(row => console.log('incoming form db as response : ',row))
-//     .catch(e => res.send(e))
-// }
-
-// let checkout = document.getElementById("confirm");
 // //TWILIO - don't touch
 app.post("/confirm", function (req, res) {
   req.session.orderId = generateRandomNumber();
@@ -252,37 +212,26 @@ app.post("/sms", (req, res) => {
   res.end(twiml.toString());
 });
 
-///TESTING//////--------------------------------
-// app.get('/api/marks', (req,res) => {
-//   const orderId = req.session.orderId;
-//   const orderTime = updateOrderTime();
-//   console.log("order id ====", orderId);
-//   console.log("order time ====", orderTime);
-//   updateOrderStatus(orderTime, orderId).then(data => {
-//       res.json({orderDetails: data});
-//   })
-// });
-
 // END OF TWILIO
 
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
   const user = req.body;
-  console.log('user.password : on left side <<<<<<<<<<<<<<< ', user.password);
+
   verifyUserCreds.fetchUserDetails(user)
-    .then(userId => {
-      console.log('user values on server,js : ', userId);
-      if (!userId) {
-        console.log(' >>>>>>> On absence of users <<<<<<<');
-        res.send(`<html><body><div><p>Hi, You credentials doesn't match.
+  .then(userId => {
+    console.log('user values on server,js : ',userId);
+    if(!userId) {
+      console.log(' >>>>>>> On absence of users <<<<<<<');
+      res.send(`<html><body><div><p>Hi, You credentials doesn't match.
       Unfortunately you can't have the right to move ahead on this.
       </p>Please go back to your <a href="/login">login</a> page or click home
       <a href="/">🏡</a> </div></body></html>\n`);
-        return;
-      }
-      req.session.userId = userId;
-      res.redirect("/");
-    })
+      return;
+    }
+  req.session.userId = userId;
+  res.redirect("/");
+  })
     .catch(e => res.send(e));
 });
 
