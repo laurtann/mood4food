@@ -11,11 +11,11 @@ const updateCartTotal = () => {
   let itemTotals = document.getElementsByClassName("item-total");
   let total = 0;
   for (let itemTotal of itemTotals) {
-    const price = parseFloat(itemTotal.innerText.replace('$', ''));
+    const price = parseFloat(itemTotal.innerText.replace("$", ""));
     total += price;
   }
   return total;
-}
+};
 
 // const addToOrder = () => {
 //   queryArray = [];
@@ -29,7 +29,6 @@ const updateCartTotal = () => {
 //   }
 //   return queryArray;
 // }
-
 
 // let orderNotes = document.getElementById("text-notes").textContent;
 
@@ -61,7 +60,7 @@ const toggleDescription = () => {
   let i;
 
   for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
+    coll[i].addEventListener("click", function () {
       this.classList.toggle("active");
       let content = this.nextElementSibling;
       if (content.style.display === "block") {
@@ -71,12 +70,11 @@ const toggleDescription = () => {
       }
     });
   }
-}
+};
 
-$(document).ready(function() {
-
+$(document).ready(function () {
   toggleDescription();
-  $(".plus").click(function() {
+  $(".plus").click(function () {
     let quantity = $(this).parent().siblings(".qty");
     let quantityValue = parseInt($(quantity).text());
 
@@ -91,7 +89,7 @@ $(document).ready(function() {
     $(quantity).text(String(quantityValue));
     $(totalItemCost).text("$" + String(totalCost));
 
-    const tax = updateCartTotal() * .15;
+    const tax = updateCartTotal() * 0.15;
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
@@ -99,7 +97,7 @@ $(document).ready(function() {
     nameAndQuantity();
   });
 
-  $(".minus").click(function() {
+  $(".minus").click(function () {
     let quantity = $(this).parent().siblings(".qty");
     let quantityValue = parseInt($(quantity).text());
 
@@ -114,7 +112,7 @@ $(document).ready(function() {
     $(quantity).text(String(quantityValue));
     $(totalItemCost).text("$" + String(totalCost));
 
-    const tax = updateCartTotal() * .15;
+    const tax = updateCartTotal() * 0.15;
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
@@ -122,14 +120,14 @@ $(document).ready(function() {
     nameAndQuantity();
   });
 
-  $(".remove").click(function() {
+  $(".remove").click(function () {
     let quantity = $(this).parent().siblings(".qty");
     let totalItemCost = $(this).parent().siblings(".item-total");
 
     $(quantity).text("0");
     $(totalItemCost).text("$0");
 
-    const tax = updateCartTotal() * .15;
+    const tax = updateCartTotal() * 0.15;
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
@@ -137,13 +135,18 @@ $(document).ready(function() {
     nameAndQuantity();
   });
 
-  $('#btn').on('click', (evt) => {
+  $("#btn").on("click", (evt) => {
     console.log("CLICKED");
-    $.get('/api/marks').then(response => {
-      $(this).prop('disabled', true);
+    $.get("/api/marks").then((response) => {
+      $(this).prop("disabled", true);
+      $("deliverContainer").show();
       var orderTime = JSON.stringify(response.orderDetails);
       orderTime = orderTime.slice(1, -1);
-      $('#delivery-time').append(orderTime, ' minutes');
+      $("#delivery-time").append(
+        "Your order will be ready in: ",
+        orderTime,
+        " minutes"
+      );
     });
   });
 });
