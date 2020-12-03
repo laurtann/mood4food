@@ -62,6 +62,18 @@
           <li class="list-group-item">Total: <%=orderTotal %></li>
           <li class="list-group-item">Special Notes: <%= orderNotes %></li>
         </ul>
+        <div class="alert alert-info" role="alert">
+          <button type="button" class="btn btn-light">
+            Check delivery time
+          </button>
+          <span class="badge badge-secondary">
+            <% if (orderStatus='ip') { %>
+            <h3>Restaurant has not updated order time yet. Try again later.</h3>
+            <% } else { %>
+            <h3>Order will be ready in <%= orderStatus %> minutes</h3>
+            <% } %>
+          </span>
+        </div>
       </div>
     </header>
     <main></main>

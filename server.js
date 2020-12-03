@@ -174,17 +174,11 @@ app.post("/confirm", function (req, res) {
     userId: userId,
     orderStatus: orderStatus,
   };
-  console.log("template vars ==== ", templateVars);
+
   orderDb
     .addToOrderDb(nameAndQty, orderNotes, orderTotal, orderStatus, userId)
     .then((row) => console.log("incoming form db as response : ", row))
     .catch((e) => res.send(e));
-
-  // console.log("req.body ====", req.body);
-  // console.log("res.body ====", res.body);
-  // console.log("food ====", req.body.foodQty);
-  // console.log("price ====", req.body.orderTotal);
-  // console.log("notes ====", req.body.orderTotal);
 
   console.log("in orders");
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
