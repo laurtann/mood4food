@@ -94,6 +94,13 @@ const getTime = () => {
   return datetime;
 };
 
+///TESTING//////--------------------------------
+app.get('/api/marks', (req,res) => {
+  const userId = req.session.userId;
+  getPhoneNumFromId(userId).then(data => {
+      res.json({phoneNum: data});
+  })
+});
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -178,7 +185,7 @@ app.post("/confirm", function (req, res) {
   };
 
   orderDb
-    .addToOrderDb(orderId, nameAndQty, orderNotes, orderTotal, userId, orderStatus)
+    .addToOrderDb(orderId, nameAndQty, orderTotal, orderNotes, orderStatus, userId,)
     .then((row) => console.log("incoming form db as response : ", row))
     .catch((e) => res.send(e));
 

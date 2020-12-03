@@ -16,7 +16,7 @@ module.exports = (db) => {
       ;`, [id]
       )
       .then((response) => {
-        return response.rows[0];
+        return response.rows[0].phone_num;
       }).catch(err => console.log(err));
   };
 
