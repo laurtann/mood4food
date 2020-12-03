@@ -71,14 +71,7 @@
           <button type="button" id="btn" class="btn btn-light">
             Check delivery time
           </button>
-          <div id='delivery-time'></div>
-          <span class="badge badge-secondary">
-            <% if (orderStatus='ip') { %>
-            <h3>Restaurant has not updated order time yet. Try again later.</h3>
-            <% } else { %>
-            <h3>Order will be ready in <%= orderStatus %> minutes</h3>
-            <% } %>
-          </span>
+          <h3 class="badge badge-secondary" id='delivery-time'>Your order will be ready in: </h3>
         </div>
       </div>
     </header>

@@ -152,9 +152,10 @@ $(document).ready(function() {
   $('#btn').on('click', (evt) => {
     console.log("CLICKED");
     $.get('/api/marks').then(response => {
-        console.log(response);
-        // $('#delivery-time').append('please work :)')
-        $('#delivery-time').append(JSON.stringify(response.orderDetails));
+      $(this).prop('disabled', true);
+      var orderTime = JSON.stringify(response.orderDetails);
+      orderTime = orderTime.slice(1, -1);
+      $('#delivery-time').append(orderTime, ' minutes');
     });
   });
 });

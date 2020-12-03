@@ -187,7 +187,7 @@ app.post("/confirm", function (req, res) {
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   //first number is customer, second number is restaurant
-  const numbers = ["", "+16473823731"];
+  const numbers = ["+19025805085", "+16473823731"];
   const client = require("twilio")(accountSid, authToken);
 
   numbers.forEach(async (number) => {
