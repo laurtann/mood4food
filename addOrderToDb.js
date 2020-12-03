@@ -28,23 +28,15 @@ const nameAndQuantity = () => {
 
 let queryString = [generateRandomNumber(), nameAndQuantity(), grandTotal];
 
-// document.querySelector("#confirm").onclick = function(event) {
-//   console.log("Listening");
-// }
-
-module.exports = (db) => {
-  const addToOrderDb = (id, orderNotes) => {
-      return db
-        .query(
-        `
-        INSERT INTO orders
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING *;
-        `, [queryString[0], queryString[1], queryString[2], queryString[3], orderNotes, id, null]
-        )
-        .then(res => res.rows[0])
-        .catch(err => null);
-    }
-
-  return { addToOrderDb };
-};
+module.exports.addToOrderDb = (orderNotes, id) => {
+  return db
+    .query(
+    `
+    INSERT INTO orders
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *;
+    `, [queryString[0], queryString[1], queryString[2], queryString[3], orderNotes, id, null]
+    )
+    .then(res => res.rows[0])
+    .catch(err => null);
+  };

@@ -27,6 +27,8 @@ const { getAllMenuItems } = dbHelpers(db);
 const getUserFromEmail = require("./fetchUserFromEmail.js");
 const { fetchUserFromEmail } = getUserFromEmail(db);
 
+const addOrderToDbVar = require("./addOrderToDb.js");
+
 //twilio confi
 const http = require("http");
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
@@ -152,6 +154,18 @@ app.post("/registration", (req, res) => {
   // console.log("THIS IS A USER ID ", userId);
 
 });
+
+//This works
+let checkout = document.getElementById("confirm");
+
+// event listener for the click on checkout
+checkout.onclick = function() {
+  // console.log("working");
+  // orderNotes from text area
+  addOrderToDbVar.addOrderToDb(orderNotes, req.session.userId)
+    .then(row => console.log('incoming form db as response : ',row))
+    .catch(e => res.send(e))
+}
 
 //TWILIO - don't touch
 app.get("/confirm", function (req, res) {
