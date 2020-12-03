@@ -6,24 +6,33 @@ const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
-const addFoodToDbVals = require("./public/scripts/checkout.js");
-const addFoodToOrder = addFoodToDbVals();
-
-module.exports = () => {
-  const addToOrderDb = (addFoodToOrder) => {
-    for (let arr of addFoodToOrder) {
-      return db
-        .query(
-        `
-        INSERT INTO orders
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING *;
-        `, [arr[0], arr[1], arr[2], arr[3], arr[4]]
-        )
-        .then(res => res.rows[0])
-        .catch(err => null);
-      }
-  };
-
-  return { addToOrderDb };
+const generateRandomNumber = () => {
+  const random = Math.floor(Math.random() * 1000) + 61;
+  return random;
 };
+
+// module.exports.addToOrderDb = (nameAndQty, orderNote, total, userId, orderStatus) => {
+//   return db
+//     .query(
+//     `
+//     INSERT INTO orders
+//     VALUES ($1, $2, $3, $4, $5, $6)
+//     RETURNING *;
+//     `, [generateRandomNumber(), nameAndQty, orderNote, total, userId, orderStatus]
+//     )
+//     .then(res => res.rows[0])
+//     .catch(err => null);
+//   };
+
+  module.exports.addToOrderDb = (nameAndQty, orderNote, total, userId, orderStatus) => {
+    return db
+    .query(
+    `
+    INSERT INTO orders
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *;
+    `, [generateRandomNumber(), nameAndQty, orderNote, total, userId, orderStatus]
+    )
+    .then(res => console.log("This is fine---", res.rows[0]))
+    .catch(err => console.log(err));
+  };
