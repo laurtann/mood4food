@@ -19,8 +19,9 @@ CREATE TABLE food_items (
 );
 CREATE TABLE orders(
   id SERIAL PRIMARY KEY NOT NULL,
-  food_qty INTEGER NOT NULL,
+  food_name_qty VARCHAR(255) NOT NULL,
+  order_total VARCHAR(255) NOT NULL,
+  order_notes VARCHAR(255) NOT NULL,
   order_status VARCHAR(255) NOT NULL,
-  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  food_id INTEGER NOT NULL REFERENCES food_items(id) ON DELETE CASCADE
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );

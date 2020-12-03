@@ -67,7 +67,7 @@
                 <table class="table table-responsive">
                   <thead class="thead-light">
                     <tr>
-                      <th scope="col" id="hide-food-id">Food ID</th>
+                      <!-- <th scope="col" id="hide-food-id">Food ID</th> -->
                       <th scope="col"></th>
                       <th scope="col">Expand to Read More!</th>
                       <th scope="col">Cost</th>
@@ -79,7 +79,7 @@
                   <tbody>
                   <% for(const food of menuItems) { %>
                     <tr class="food-row">
-                      <td class="hide food-id"><%= food.id %></td>
+                      <!-- <td class="hide food-id"><%= food.id %></td> -->
                       <td class='food-photo'>
                         <img src="<%= food.food_photo_url %>" />
                       </td>
@@ -119,19 +119,17 @@
                 </tr>
                 <tr>
                   <th scope="row">Grand Total</th>
-                  <td class="order-grand-total">$0</td>
-                </tr>
-                <tr>
-                  <th scope="row">Order Notes</th>
-                  <td class="order-notes">
-                      <textarea name="text" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
-                  </td>
+                  <td id="order-grand-total">$0</td>
                 </tr>
               </tbody>
             </table>
             <form action="/confirm" method="POST">
-              <textarea name="orderNotes" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
-              <button type="submit" class="btn btn-success" id="confirm">I'm Ready! Confirm Order</button>
+              <div class="checkout-form">
+                <textarea class="order-notes" name="orderNotes" placeholder="Allergies? Mods? Love notes? Leave it here"></textarea>
+                <button type="submit" class="btn btn-success" id="confirm">I'm Ready! Confirm Order</button>
+              </div>
+              <textarea class="hide" name="foodQty" id="food-qty"></textarea>
+              <textarea class="hide" name="orderTotal" id="order-total"></textarea>
             </form>
           </section>
         </div>

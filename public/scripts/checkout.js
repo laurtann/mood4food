@@ -21,6 +21,31 @@ const addToOrder = () => {
   return queryArray;
 }
 
+
+// let orderNotes = document.getElementById("text-notes").textContent;
+
+const generateRandomNumber = () => {
+  const random = Math.floor(Math.random() * 1000) + 61;
+  return random;
+};
+
+const nameAndQuantity = () => {
+  let foodNames = document.getElementsByClassName("food-name");
+  let qty = document.getElementsByClassName("qty");
+  let grandTotal = document.getElementById("order-grand-total");
+  let orderQty = document.getElementById("food-qty");
+  let orderTotal = document.getElementById("order-total");
+  let orderArray = [];
+  for (let i = 0; i < qty.length; i++) {
+    if (Number(qty[i].innerText) !== 0) {
+      orderArray.push([`${foodNames[i].innerText}: ${qty[i].innerText}, `]);
+    }
+  }
+  orderQty.value = orderArray.join("");
+  orderTotal.value = grandTotal.innerText;
+  console.log("something happening here ----");
+};
+
 // adapted from w3c
 const toggleDescription = () => {
   var coll = document.getElementsByClassName("collapsible");
@@ -69,11 +94,12 @@ $(document).ready(function() {
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
-    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
+    $("#order-grand-total").text("$" + grandTotal.toFixed(2));
 
     // test
     addFoodToOrder = addToOrder();
     addFoodToDbVals();
+    nameAndQuantity();
   });
 
   $(".minus").click(function() {
@@ -95,7 +121,8 @@ $(document).ready(function() {
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
-    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
+    $("#order-grand-total").text("$" + grandTotal.toFixed(2));
+    nameAndQuantity();
   });
 
   $(".remove").click(function() {
@@ -109,7 +136,8 @@ $(document).ready(function() {
     const grandTotal = updateCartTotal() + tax;
     $(".order-total").text("$" + updateCartTotal());
     $(".order-tax").text("$" + tax.toFixed(2));
-    $(".order-grand-total").text("$" + grandTotal.toFixed(2));
+    $("#order-grand-total").text("$" + grandTotal.toFixed(2));
+    nameAndQuantity();
   });
 
   $("#confirm").click(function() {

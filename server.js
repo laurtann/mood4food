@@ -1,6 +1,8 @@
 // load .env data into process.env
 require("dotenv").config();
 
+// hide the query in a textarea and populate w jQ then grab it
+
 // Web server config
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
@@ -24,8 +26,9 @@ db.connect();
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
 
-const getUserFromEmail = require("./fetchUserFromEmail.js");
-const { fetchUserFromEmail } = getUserFromEmail(db);
+// const getUserFromEmail = require("./fetchUserFromEmail.js");
+
+const orderDb = require("./addOrderToDb.js");
 
 //twilio confi
 const http = require("http");
@@ -144,17 +147,41 @@ app.post("/registration", (req, res) => {
     .catch((e) => res.send(e));
 });
 
-//TWILIO - don't touch
+//This works
+
+// // event listener for the click on checkout
+// checkout.onclick = function() {
+//   // console.log("working");
+//   // orderNotes from text area
+//   addOrderToDbVar.addOrderToDb(orderNotes, req.session.userId)
+//     .then(row => console.log('incoming form db as response : ',row))
+//     .catch(e => res.send(e))
+// }
+
+// let checkout = document.getElementById("confirm");
+// //TWILIO - don't touch
 app.post("/confirm", function (req, res) {
-  let userId = 10;
-  console.log("req.body ====", req.body);
-  console.log("res.body ====", res.body);
-  console.log("req.body.text ====", req.body.orderNotes);
+  const orderNotes = req.body.orderNotes;
+  const nameAndQty = req.body.foodQty;
+  const orderTotal = req.body.orderTotal;
+  const userId = req.session.userId;
+  let orderStatus = "ip";
+  // const orderNotes =
+  orderDb.addToOrderDb(nameAndQty, orderNotes, orderTotal, orderStatus, userId)
+    .then(row => console.log('incoming form db as response : ',row))
+    .catch(e => res.send(e));
+
+  // console.log("req.body ====", req.body);
+  // console.log("res.body ====", res.body);
+  // console.log("food ====", req.body.foodQty);
+  // console.log("price ====", req.body.orderTotal);
+  // console.log("notes ====", req.body.orderTotal);
+
   console.log("in orders");
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   //first number is customer, second number is restaurant
-  const numbers = ["", "+16473823731"];
+  const numbers = ["", "+19025805085"];
   const client = require("twilio")(accountSid, authToken);
 
   numbers.forEach(async (number) => {
@@ -224,4 +251,8 @@ app.listen(PORT, () => {
 getPhoneNumFromId().then((rows) => {
   let userPhoneNumber = rows.phone_num;
   return userPhoneNumber;
+});
+
+app.get("/checkout", (req, res) => {
+  res.render("checkout");
 });
