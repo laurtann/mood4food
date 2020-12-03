@@ -69,7 +69,9 @@
           <% for (let item of foodArr) { %>
           <li class="list-group-item"><%=item %></li>
           <% }%>
-          <li class="list-group-item">Total: <%=orderTotal %></li>
+          <li class="list-group-item">
+            <strong>Total: <%=orderTotal %></strong>
+          </li>
           <li class="list-group-item">Special Notes: <%= orderNotes %></li>
         </ul>
         <div class="alert alert-info" role="alert">
@@ -77,8 +79,13 @@
             Check delivery time
           </button>
         </div>
-        <div class="alert alert-info" role="alert" id="deliverContainer">
-          <h3 id="delivery-time"></h3>
+        <div
+          class="alert alert-info"
+          role="alert"
+          id="deliverContainer"
+          style="display: none"
+        >
+          <h3 id="delivery-time" style="display: none"></h3>
         </div>
       </div>
     </header>

@@ -138,8 +138,8 @@ $(document).ready(function () {
   $("#btn").on("click", (evt) => {
     console.log("CLICKED");
     $.get("/api/marks").then((response) => {
-      $(this).prop("disabled", true);
-      $("deliverContainer").show();
+      $("#deliverContainer").attr("style", "display: inline");
+      $("#delivery-time").attr("style", "display: inline");
       var orderTime = JSON.stringify(response.orderDetails);
       orderTime = orderTime.slice(1, -1);
       $("#delivery-time").append(
