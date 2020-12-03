@@ -37,9 +37,10 @@ const MessagingResponse = require("twilio").twiml.MessagingResponse;
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const getUser = require("./getPhoneNum.js");
-const { getPhoneNumFromId } = getUser(db);
+// const { getPhoneNumFromId } = getUser(db);
 const addUser = require("./3_add_user_details_reg");
 const verifyUserCreds = require("./4_match_login_creds_post");
+console.log('----- 43 -----');
 const checkExistingEmailId = require("./5_check_existing_email_reg");
 
 // const addOrderToDb = require("./addOrderToDb.js");
