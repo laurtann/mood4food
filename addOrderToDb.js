@@ -6,10 +6,10 @@ const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
-const generateRandomNumber = () => {
-  const random = Math.floor(Math.random() * 1000) + 61;
-  return random;
-};
+// const generateRandomNumber = () => {
+//   const random = Math.floor(Math.random() * 1000) + 61;
+//   return random;
+// };
 
 // module.exports.addToOrderDb = (nameAndQty, orderNote, total, userId, orderStatus) => {
 //   return db
@@ -24,14 +24,14 @@ const generateRandomNumber = () => {
 //     .catch(err => null);
 //   };
 
-  module.exports.addToOrderDb = (nameAndQty, orderNote, total, userId, orderStatus) => {
+  module.exports.addToOrderDb = (orderNumber, nameAndQty, orderNote, total, userId, orderStatus) => {
     return db
     .query(
     `
     INSERT INTO orders
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *;
-    `, [generateRandomNumber(), nameAndQty, orderNote, total, userId, orderStatus]
+    `, [orderNumber, nameAndQty, orderNote, total, userId, orderStatus]
     )
     .then(res => console.log("This is fine---", res.rows[0]))
     .catch(err => console.log(err));
