@@ -54,9 +54,14 @@
       <div class="container">
         <h1 class="display-7">Thank you for your order!</h1>
         <h3 class="lead">
-          Your order message has been confirmed at: <%=message.to%> <br />We
-          will be updating the estimated time of your order shortly.
+          Your order message has been confirmed at: <%=message.to%>
         </h3>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-info">Order Summary</li>
+          <li class="list-group-item"><%=nameAndQty %></li>
+          <li class="list-group-item">Total: <%=orderTotal %></li>
+          <li class="list-group-item">Special Notes: <%= orderNotes %></li>
+        </ul>
       </div>
     </header>
     <main></main>
