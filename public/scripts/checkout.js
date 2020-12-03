@@ -8,18 +8,18 @@ const updateCartTotal = () => {
   return total;
 }
 
-const addToOrder = () => {
-  queryArray = [];
-  const foodId = document.getElementsByClassName("food-id");
-  const foodQty = document.getElementsByClassName("qty");
+// const addToOrder = () => {
+//   queryArray = [];
+//   const foodId = document.getElementsByClassName("food-id");
+//   const foodQty = document.getElementsByClassName("qty");
 
-  for (let i = 0; i < foodQty.length; i++) {
-    if (Number(foodQty[i].innerText) !== 0) {
-      queryArray.push([1, 1, Number(foodId[i].innerText), Number(foodQty[i].innerText), "ip"]);
-    }
-  }
-  return queryArray;
-}
+//   for (let i = 0; i < foodQty.length; i++) {
+//     if (Number(foodQty[i].innerText) !== 0) {
+//       queryArray.push([1, 1, Number(foodId[i].innerText), Number(foodQty[i].innerText), "ip"]);
+//     }
+//   }
+//   return queryArray;
+// }
 
 
 // let orderNotes = document.getElementById("text-notes").textContent;
@@ -68,9 +68,9 @@ const toggleDescription = () => {
 let addFoodToOrder;
 
 // allows us to access outside of the jq
-const addFoodToDbVals = () => {
-  return addFoodToOrder;
-}
+// const addFoodToDbVals = () => {
+//   return addFoodToOrder;
+// }
 
 $(document).ready(function() {
 
@@ -97,8 +97,8 @@ $(document).ready(function() {
     $("#order-grand-total").text("$" + grandTotal.toFixed(2));
 
     // test
-    addFoodToOrder = addToOrder();
-    addFoodToDbVals();
+    // addFoodToOrder = addToOrder();
+    // addFoodToDbVals();
     nameAndQuantity();
   });
 
@@ -141,10 +141,11 @@ $(document).ready(function() {
   });
 
   $("#confirm").click(function() {
-    addFoodToOrder = addToOrder();
-    addFoodToDbVals();
+    // addFoodToOrder = addToOrder();
+    // addFoodToDbVals();
   });
 });
+
 
 
 
