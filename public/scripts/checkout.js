@@ -154,7 +154,7 @@ $(document).ready(function() {
     $.get('/api/marks').then(response => {
         console.log(response);
         // $('#delivery-time').append('please work :)')
-        $('#delivery-time').append(JSON.stringify(response.phoneNum));
+        $('#delivery-time').append(JSON.stringify(response.orderDetails));
     });
   });
 });

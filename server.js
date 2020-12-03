@@ -94,13 +94,7 @@ const getTime = () => {
   return datetime;
 };
 
-///TESTING//////--------------------------------
-app.get('/api/marks', (req,res) => {
-  const userId = req.session.userId;
-  getPhoneNumFromId(userId).then(data => {
-      res.json({phoneNum: data});
-  })
-});
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -212,7 +206,11 @@ app.post("/confirm", function (req, res) {
 });
 
 const updateOrderTime = function (orderTime) {
-  console.log("Updated order time: ", orderTime);
+
+  app.get('/api/marks', (req,res) => {
+    console.log("order time ====", orderTime);
+    res.json({orderDetails: orderTime});
+  });
 };
 
 app.post("/sms", (req, res) => {
@@ -227,6 +225,17 @@ app.post("/sms", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 });
+
+///TESTING//////--------------------------------
+// app.get('/api/marks', (req,res) => {
+//   const orderId = req.session.orderId;
+//   const orderTime = updateOrderTime();
+//   console.log("order id ====", orderId);
+//   console.log("order time ====", orderTime);
+//   updateOrderStatus(orderTime, orderId).then(data => {
+//       res.json({orderDetails: data});
+//   })
+// });
 
 // END OF TWILIO
 
