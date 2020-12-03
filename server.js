@@ -41,7 +41,7 @@ const getUser = require("./getPhoneNum.js");
 const addUser = require("./3_add_user_details_reg");
 const verifyUserCreds = require("./4_match_login_creds_post");
 
-// const checkExistingEmailId = require("./5_check_existing_email_reg");
+const checkExistingEmailId = require("./5_check_existing_email_reg");
 
 // const addOrderToDb = require("./addOrderToDb.js");
 
@@ -131,21 +131,29 @@ app.get("/register", (req, res) => {
 
 app.post("/registration", (req, res) => {
   const user = req.body;
-  user.password = bcrypt.hashSync(user.password, 12);
-  console.log("user pwd in registeration  : ", user.password);
-  addUser
-    .addUserDetails(user)
-    .then((user) => {
-      if (!user.id) {
-        console.log(" >>>>>>> On absence of users <<<<<<<");
-        res.send({ error: "error" });
+  console.log('  user details --->>>> ', user);
+  // when password and confirm password are not matching exactly
+  if (user.password !== user.confirm_password) {
+    res.send(`<html><body><div><p>Hi, You password and confirm password field doesn't match.
+      Unfortunately you can't have the right to move ahead on this.
+      </p>Please go back to your <a href="/register">registeration</a> page or click home
+      <a href="/">🏡</a> </div></body></html>\n`);
+    return;
+  }
+  // when user email id already exists in the system
+  checkExistingEmailId
+    .fetchEmailId(user.email)
+    .then((email) => {
+      console.log('inside of if block for fetchEmailId and returned email form db is : ', email);
+      if (email) {
+        console.log(" >>>>>>> On presence of email match <<<<<<<");
+        res.send(`<html><body><div><p>Hi, Your provided email is already existing.
+        Unfortunately you can't have the right to move ahead on this.
+        </p>Please go back to your <a href="/register">registration</a> page or click home
+        <a href="/">🏡</a> </div></body></html>\n`);
         return;
       }
-      req.session.userId = user.id;
-      res.redirect("/");
     })
-    .catch((e) => res.send(e));
-});
 
 
 // //TWILIO - don't touch
