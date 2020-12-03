@@ -128,6 +128,14 @@ app.get("/register", (req, res) => {
 app.post("/registration", (req, res) => {
   const user = req.body;
   console.log('****** typeof user is : ****  ', typeof user.phone);
+
+  if(!user.email || !user.password) {
+    res.status(400);
+    res.send("Please enter a valid email & password");
+    return;
+  }
+
+
   user.password = bcrypt.hashSync(user.password, 12);
   console.log('user pwd in registeration  : ',user.password);
   addUser.addUserDetails(user)
@@ -197,15 +205,15 @@ app.post("/sms", (req, res) => {
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
   const user = req.body;
-  console.log('user pwd in login  : ',user.password);
-  console.log('000 202 ----> ', verifyUserCreds);
   verifyUserCreds.fetchUserDetails(user)
   .then(userId => {
-
     console.log('user values on server,js : ',userId);
     if(!userId) {
       console.log(' >>>>>>> On absence of users <<<<<<<');
-      res.send({error: "error"});
+      res.send(`<html><body><div><p>Hi, You credentials doesn't match.
+      Unfortunately you can't have the right to move ahead on this.
+      </p>Please go back to your <a href="/login">login</a> page or click home
+      <a href="/">🏡</a> </div></body></html>\n`);
       return;
     }
   req.session.userId = userId;
