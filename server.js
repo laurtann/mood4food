@@ -29,6 +29,7 @@ const { getAllMenuItems } = dbHelpers(db);
 // const getUserFromEmail = require("./fetchUserFromEmail.js");
 
 const orderDb = require("./addOrderToDb.js");
+const updateOrderStatus = require("./updateOrderStatus.js");
 
 //twilio confi
 const http = require("http");
@@ -161,13 +162,17 @@ app.post("/registration", (req, res) => {
 // let checkout = document.getElementById("confirm");
 // //TWILIO - don't touch
 app.post("/confirm", function (req, res) {
+  req.session.orderId = generateRandomNumber();
+  const orderId = req.session.orderId;
+  console.log("order id ---------", orderId);
   const orderNotes = req.body.orderNotes;
+  console.log("order notes ---------", orderNotes);
   const nameAndQty = req.body.foodQty;
   const orderTotal = req.body.orderTotal;
   const userId = req.session.userId;
   let orderStatus = "ip";
   // const orderNotes =
-  orderDb.addToOrderDb(nameAndQty, orderNotes, orderTotal, orderStatus, userId)
+  orderDb.addToOrderDb(orderId, nameAndQty, orderTotal, orderNotes, orderStatus, userId)
     .then(row => console.log('incoming form db as response : ',row))
     .catch(e => res.send(e));
 
@@ -248,10 +253,10 @@ app.listen(PORT, () => {
 });
 
 // get phoneNum - user on checkout pg
-getPhoneNumFromId().then((rows) => {
-  let userPhoneNumber = rows.phone_num;
-  return userPhoneNumber;
-});
+// getPhoneNumFromId().then((rows) => {
+//   let userPhoneNumber = rows.phone_num;
+//   return userPhoneNumber;
+// });
 
 app.get("/checkout", (req, res) => {
   res.render("checkout");
