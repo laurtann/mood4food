@@ -48,7 +48,7 @@ const nameAndQuantity = () => {
 
 // adapted from w3c
 const toggleDescription = () => {
-  var coll = document.getElementsByClassName("collapsible");
+  let coll = document.getElementsByClassName("collapsible");
   let i;
 
   for (i = 0; i < coll.length; i++) {
@@ -65,7 +65,7 @@ const toggleDescription = () => {
 }
 
 //Will hold arr of arr of order inserts
-let addFoodToOrder;
+// let addFoodToOrder;
 
 // allows us to access outside of the jq
 // const addFoodToDbVals = () => {
@@ -144,6 +144,17 @@ $(document).ready(function() {
     // addFoodToOrder = addToOrder();
     // addFoodToDbVals();
   });
+
+  // $
+  //     .ajax({
+  //       url: "/order-status",
+  //       method: "POST",
+  //       data: $('form').serialize(),
+  //     }).then(res => {
+  //       $("#tweet-text").val('');
+  //       $(".counter").val(140);
+  //       loadTweets();
+  //     });
 });
 
 
