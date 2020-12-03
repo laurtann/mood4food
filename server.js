@@ -166,10 +166,19 @@ app.post("/confirm", function (req, res) {
   const orderTotal = req.body.orderTotal;
   const userId = req.session.userId;
   let orderStatus = "ip";
-  // const orderNotes =
-  orderDb.addToOrderDb(nameAndQty, orderNotes, orderTotal, orderStatus, userId)
-    .then(row => console.log('incoming form db as response : ',row))
-    .catch(e => res.send(e));
+
+  const templateVars = {
+    orderNotes: orderNotes,
+    nameAndQty: nameAndQty,
+    orderTotal: orderTotal,
+    userId: userId,
+    orderStatus: orderStatus,
+  };
+  console.log("template vars ==== ", templateVars);
+  orderDb
+    .addToOrderDb(nameAndQty, orderNotes, orderTotal, orderStatus, userId)
+    .then((row) => console.log("incoming form db as response : ", row))
+    .catch((e) => res.send(e));
 
   // console.log("req.body ====", req.body);
   // console.log("res.body ====", res.body);
@@ -181,19 +190,19 @@ app.post("/confirm", function (req, res) {
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   //first number is customer, second number is restaurant
-  const numbers = ["", "+19025805085"];
+  const numbers = ["", "+16473823731"];
   const client = require("twilio")(accountSid, authToken);
 
   numbers.forEach(async (number) => {
     client.messages
       .create({
-        body:
-          "The order has been sucessfully placed. Delivery time will be updated shortly.",
+        body: `Thank you for your order of: ${nameAndQty}. Your total comes to ${orderTotal}. The restaurant will be notified of your special notes: ${orderNotes}. Delivery time will be updated shortly.`,
         from: "+12055966681",
         to: number,
       })
       .then((message) => {
-        res.render("confirmation", { message: message });
+        templateVars.message = message;
+        res.render("confirmation", templateVars);
       })
       .catch((err) => console.log("error: ", err));
   });
