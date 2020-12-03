@@ -153,7 +153,7 @@ app.post("/registration", (req, res) => {
         <a href="/">🏡</a> </div></body></html>\n`);
         return;
       }
-    })
+    })})
 
 
 // //TWILIO - don't touch
