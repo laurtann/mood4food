@@ -95,6 +95,7 @@ const getTime = () => {
   return datetime;
 };
 
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -204,7 +205,7 @@ app.post("/confirm", function (req, res) {
   };
 
   orderDb
-    .addToOrderDb(orderId, nameAndQty, orderNotes, orderTotal, userId, orderStatus)
+    .addToOrderDb(orderId, nameAndQty, orderTotal, orderNotes, orderStatus, userId,)
     .then((row) => console.log("incoming form db as response : ", row))
     .catch((e) => res.send(e));
 
@@ -212,7 +213,7 @@ app.post("/confirm", function (req, res) {
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   //first number is customer, second number is restaurant
-  const numbers = ["", "+16473823731"];
+  const numbers = ["+19025805085", "+16473823731"];
   const client = require("twilio")(accountSid, authToken);
 
   numbers.forEach(async (number) => {
@@ -231,7 +232,11 @@ app.post("/confirm", function (req, res) {
 });
 
 const updateOrderTime = function (orderTime) {
-  console.log("Updated order time: ", orderTime);
+
+  app.get('/api/marks', (req,res) => {
+    console.log("order time ====", orderTime);
+    res.json({orderDetails: orderTime});
+  });
 };
 
 app.post("/sms", (req, res) => {
@@ -246,6 +251,17 @@ app.post("/sms", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 });
+
+///TESTING//////--------------------------------
+// app.get('/api/marks', (req,res) => {
+//   const orderId = req.session.orderId;
+//   const orderTime = updateOrderTime();
+//   console.log("order id ====", orderId);
+//   console.log("order time ====", orderTime);
+//   updateOrderStatus(orderTime, orderId).then(data => {
+//       res.json({orderDetails: data});
+//   })
+// });
 
 // END OF TWILIO
 

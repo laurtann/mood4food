@@ -1,3 +1,12 @@
+// const { query } = require('pg');
+// // Setup a connection to PSQL with the correct credentials.
+// const pool = new Pool({
+//     user: 'labber',
+//     password: 'labber',
+//     database: 'midterm',
+//     host: 'localhost',
+// })
+
 const updateCartTotal = () => {
   let itemTotals = document.getElementsByClassName("item-total");
   let total = 0;
@@ -140,21 +149,15 @@ $(document).ready(function() {
     nameAndQuantity();
   });
 
-  $("#confirm").click(function() {
-    // addFoodToOrder = addToOrder();
-    // addFoodToDbVals();
+  $('#btn').on('click', (evt) => {
+    console.log("CLICKED");
+    $.get('/api/marks').then(response => {
+      $(this).prop('disabled', true);
+      var orderTime = JSON.stringify(response.orderDetails);
+      orderTime = orderTime.slice(1, -1);
+      $('#delivery-time').append(orderTime, ' minutes');
+    });
   });
-
-  // $
-  //     .ajax({
-  //       url: "/order-status",
-  //       method: "POST",
-  //       data: $('form').serialize(),
-  //     }).then(res => {
-  //       $("#tweet-text").val('');
-  //       $(".counter").val(140);
-  //       loadTweets();
-  //     });
 });
 
 

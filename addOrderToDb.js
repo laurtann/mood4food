@@ -24,14 +24,14 @@ db.connect();
 //     .catch(err => null);
 //   };
 
-  module.exports.addToOrderDb = (orderNumber, nameAndQty, orderNote, total, userId, orderStatus) => {
+  module.exports.addToOrderDb = (orderNumber, nameAndQty, total, orderNote, orderStatus, userId) => {
     return db
     .query(
     `
     INSERT INTO orders
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *;
-    `, [orderNumber, nameAndQty, orderNote, total, userId, orderStatus]
+    `, [orderNumber, nameAndQty, total, orderNote, orderStatus, userId]
     )
     .then(res => console.log("This is fine---", res.rows[0]))
     .catch(err => console.log(err));
