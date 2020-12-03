@@ -11,10 +11,6 @@
   margin-top: 2em;
 }
 
-.container {
-  padding-top: 2em;
-}
-
 .edit-cart {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -28,5 +24,9 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+}
+
+.btn-block {
+  margin-bottom: 3em;
 }
 /*# sourceMappingURL=checkout.css.map */

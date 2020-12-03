@@ -1,1 +1,128 @@
-/* No CSS *//*# sourceMappingURL=index.css.map */
+.place-order {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 120px;
+  height: 40px;
+}
+
+.hero {
+  background-image: url("https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  height: 225px;
+}
+
+.hero-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #fafbf5;
+  text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
+  font-size: 3em;
+  font-weight: 900;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+td.food-photo img {
+  width: 60px;
+  height: 60px;
+}
+
+.btn-inc-dec-rem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.plus {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.minus {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: 0.3em;
+}
+
+.remove {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: 0.3em;
+}
+
+.hide {
+  display: none;
+}
+
+#hide-food-id {
+  display: none;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+td .active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.order-notes textarea {
+  width: 100%;
+}
+
+main {
+  padding-top: 1em;
+}
+
+#confirm {
+  width: 100%;
+}
+
+.container h2 {
+  background-color: #a7d2dd;
+  padding: .5em;
+}
+
+.order-notes {
+  width: 100%;
+}
+/*# sourceMappingURL=index.css.map */
