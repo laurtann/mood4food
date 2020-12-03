@@ -130,8 +130,8 @@ app.get("/register", (req, res) => {
 
 app.post("/registration", (req, res) => {
   const user = req.body;
-  console.log("  user details --->>>> ", user);
-  // when password and confirm password are not matching exactly
+
+// when password and confirm password are not matching exactly
   if (user.password !== user.confirm_password) {
     res.send(`<html><body><div><p>Hi, You password and confirm password field doesn't match.
       Unfortunately you can't have the right to move ahead on this.
@@ -139,21 +139,39 @@ app.post("/registration", (req, res) => {
       <a href="/">🏡</a> </div></body></html>\n`);
     return;
   }
-  // when user email id already exists in the system
-  checkExistingEmailId.fetchEmailId(user.email).then((email) => {
-    console.log(
-      "inside of if block for fetchEmailId and returned email form db is : ",
-      email
-    );
-    if (email) {
-      console.log(" >>>>>>> On presence of email match <<<<<<<");
-      res.send(`<html><body><div><p>Hi, Your provided email is already existing.
+
+
+  //check if user already exists
+// when user email id already exists in the system
+  checkExistingEmailId
+    .fetchEmailId(user.email)
+    .then((email) => {
+      console.log('inside of if block for fetchEmailId and returned email form db is : ', email);
+      if (email) {
+        console.log(" >>>>>>> On presence of email match <<<<<<<");
+        res.send(`<html><body><div><p>Hi, Your provided email is already existing.
         Unfortunately you can't have the right to move ahead on this.
         </p>Please go back to your <a href="/register">registration</a> page or click home
         <a href="/">🏡</a> </div></body></html>\n`);
+        return;
+      }
+    })
+
+
+  //add complete details into db and work on the session
+  user.password = bcrypt.hashSync(user.password, 12);
+  console.log('user pwd in registeration  : ',user.password);
+  addUser.addUserDetails(user)
+  .then(user => {
+    if(!user.id) {
+      console.log(' >>>>>>> On absence of users <<<<<<<');
+      res.send({error: "error"});
       return;
     }
-  });
+  req.session.userId = user.id;
+  res.redirect("/");
+  })
+    .catch(e => res.send(e));
 });
 
 // //TWILIO - don't touch
