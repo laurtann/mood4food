@@ -104,6 +104,7 @@ app.get("/", (req, res) => {
     let userId = req.session.userId;
     // time is +4
     const templateVars = { menuItems: rows, userId, time: getTime() };
+    console.log("TIME ===> ", getTime());
     res.render("index", templateVars);
   });
 });

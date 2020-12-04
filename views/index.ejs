@@ -61,7 +61,7 @@
       <div class="row">
         <div class="col col-sm-8">
           <section class="order-info">
-            <% if (time < 14) { %>
+            <% if (time > 8 && time < 14) { %>
               <h2>What's for <strong>Breakfast</strong>?</h2>
             <% } else if (time >= 14 && time <= 18) { %>
               <h2>What's for <strong>Lunch</strong>?</h2>
