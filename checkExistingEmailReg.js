@@ -11,7 +11,6 @@ module.exports.fetchEmailId = (email) => {
   const params = [email];
   return db.query(sql,params)
       .then((response) => {
-        console.log('response.rows[0] : ',response.rows[0]);
         return response.rows[0].email;
       })
       .catch((err)=>{console.log('query error', err);});

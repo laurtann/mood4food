@@ -38,10 +38,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const getUser = require("./getPhoneNum.js");
 // const { getPhoneNumFromId } = getUser(db);
-const addUser = require("./3_add_user_details_reg");
-const verifyUserCreds = require("./4_match_login_creds_post");
-
-const checkExistingEmailId = require("./5_check_existing_email_reg");
+const addUser = require("./addUserDetailsReg");
+const verifyUserCreds = require("./matchLoginCredsPost");
+const checkExistingEmailId = require("./checkExistingEmailReg");
 
 // const addOrderToDb = require("./addOrderToDb.js");
 
@@ -146,9 +145,7 @@ app.post("/registration", (req, res) => {
   checkExistingEmailId
     .fetchEmailId(user.email)
     .then((email) => {
-      console.log('inside of if block for fetchEmailId and returned email form db is : ', email);
       if (email) {
-        console.log(" >>>>>>> On presence of email match <<<<<<<");
         res.send(`<html><body><div><p>Hi, Your provided email is already existing.
         Unfortunately you can't have the right to move ahead on this.
         </p>Please go back to your <a href="/register">registration</a> page or click home
@@ -160,11 +157,9 @@ app.post("/registration", (req, res) => {
 
   //add complete details into db and work on the session
   user.password = bcrypt.hashSync(user.password, 12);
-  console.log('user pwd in registeration  : ',user.password);
   addUser.addUserDetails(user)
   .then(user => {
     if(!user.id) {
-      console.log(' >>>>>>> On absence of users <<<<<<<');
       res.send({error: "error"});
       return;
     }
@@ -253,13 +248,12 @@ app.post("/sms", (req, res) => {
 //jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
   const user = req.body;
-
+  // user.password = bcrypt.hashSync(user.password, 12);
+  console.log('user details : ',user);
   verifyUserCreds
     .fetchUserDetails(user)
     .then((userId) => {
-      console.log("user values on server,js : ", userId);
       if (!userId) {
-        console.log(" >>>>>>> On absence of users <<<<<<<");
         res.send(`<html><body><div><p>Hi, You credentials doesn't match.
       Unfortunately you can't have the right to move ahead on this.
       </p>Please go back to your <a href="/login">login</a> page or click home
