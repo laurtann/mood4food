@@ -16,15 +16,10 @@ module.exports.fetchUserDetails = (user) => {
 
   return db.query(sql,params)
       .then((response) => {
-        console.log('user.password : on right side --> ', user.password);
-        console.log('response.rows[0].password : on right side --> ', response.rows[0].password);
         if(bcrypt.compareSync(user.password, response.rows[0].password)){
-          console.log('inside if block of right side');
           user['id'] = response.rows[0].id;
-          console.log(' user id : ', response.rows[0].id);
           return response.rows[0].id;
         }else{
-          console.log('inside else block of right side');
           user['id'] = null;
           return user.id;
         }
