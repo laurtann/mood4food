@@ -112,6 +112,7 @@ app.get("/", (req, res) => {
 // added for dev - move later
 app.get("/login", (req, res) => {
   let userId = req.session.userId;
+  let userName = req.session.userName
   if (userId) {
     res.redirect("/");
   } else {
@@ -122,6 +123,7 @@ app.get("/login", (req, res) => {
 // added for dev - move later
 app.get("/register", (req, res) => {
   let userId = req.session.userId;
+  let userName = req.session.userName
   if (userId) {
     res.redirect("/");
   } else {
@@ -152,7 +154,7 @@ app.post("/registration", (req, res) => {
         console.log(" >>>>>>> On presence of email match <<<<<<<");
         res.send(`<html><body><div><p>Hi, Your provided email is already existing.
         Unfortunately you can't have the right to move ahead on this.
-        </p>Please go back to your <a href="/register">registration</a> page or click home
+        </p>Please go back to your <a href="/login"></a> page or click home
         <a href="/">🏡</a> </div></body></html>\n`);
         return;
       }
