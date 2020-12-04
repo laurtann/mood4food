@@ -21,13 +21,18 @@ body {
 
 .btn-success {
   color: white;
-  background-color: #f47068;
-  border-color: #f47068;
+  background-color: #0f606b;
+  border-color: #0f606b;
   font-family: 'Comfortaa', cursive;;
 }
 
 .btn-success:hover {
-  color: #f47068;
-  background-color: white;
-  border-color: #f47068;
+  color: #0f606b;
+  background-color: #a7d2dd;
+  border-color: #0f606b;
+}
+
+.container h2 {
+  background-color: #0f606b;
+  color: white;
 }
