@@ -45,6 +45,7 @@
   </head>
 
 <body>
+  <main>
   <%- include('partials/_header') %>
   <div class="signin-form">
     <form action="/login" method="post">
@@ -62,8 +63,13 @@
         <button type="submit" class="btn btn-success btn-lg btn-block">Login Now</button>
       </div>
     </form>
+    <% if (error) { %>
+      <div class="text-center"><h2 style="color: red"><%= error %></h2></div>
+    <% } %>
     <div class="text-center">Do not have an account? <a href="/register">Sign up</a></div>
   </div>
+</main>
+
   <%- include('partials/_footer') %>
 
   <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

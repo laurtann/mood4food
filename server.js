@@ -31,22 +31,18 @@ const { getAllMenuItems } = dbHelpers(db);
 const orderDb = require("./addOrderToDb.js");
 const updateOrderStatus = require("./updateOrderStatus.js");
 
-//twilio confi
+//twilio config
 const http = require("http");
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const getUser = require("./getPhoneNum.js");
-// const { getPhoneNumFromId } = getUser(db);
+const { getPhoneNumFromId } = getUser(db);
 const addUser = require("./addUserDetailsReg");
 const verifyUserCreds = require("./matchLoginCredsPost");
 const checkExistingEmailId = require("./checkExistingEmailReg");
 
 // const addOrderToDb = require("./addOrderToDb.js");
-
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
@@ -115,7 +111,7 @@ app.get("/login", (req, res) => {
   if (userId) {
     res.redirect("/");
   } else {
-    res.render("login", { userId: null });
+    res.render("login", { error: null, userId: null });
   }
 });
 
@@ -126,7 +122,7 @@ app.get("/register", (req, res) => {
   if (userId) {
     res.redirect("/");
   } else {
-    res.render("registration", { userId: null });
+    res.render("registration", { userId: null, error: null });
   }
 });
 
@@ -135,10 +131,8 @@ app.post("/registration", (req, res) => {
 
 // when password and confirm password are not matching exactly
   if (user.password !== user.confirm_password) {
-    res.send(`<html><body><div><p>Hi, You password and confirm password field doesn't match.
-      Unfortunately you can't have the right to move ahead on this.
-      </p>Please go back to your <a href="/register">registeration</a> page or click home
-      <a href="/">🏡</a> </div></body></html>\n`);
+    const templateVars = { error: "Passwords do not match", userId: null};
+    res.render("registration", templateVars);
     return;
   }
 
@@ -149,10 +143,8 @@ app.post("/registration", (req, res) => {
     .fetchEmailId(user.email)
     .then((email) => {
       if (email) {
-        res.send(`<html><body><div><p>Hi, Your provided email is already existing.
-        Unfortunately you can't have the right to move ahead on this.
-        </p>Please go back to your <a href="/login"></a> page or click home
-        <a href="/">🏡</a> </div></body></html>\n`);
+        const templateVars = { error: "Email already exists", userId: null};
+        res.render("registration", templateVars);
         return;
       }
     })
@@ -163,6 +155,8 @@ app.post("/registration", (req, res) => {
   addUser.addUserDetails(user)
   .then(user => {
     if(!user.id) {
+      const templateVars = { error: "Error", userId: null};
+      res.render("registration", templateVars);
       res.send({error: "error"});
       return;
     }
@@ -192,6 +186,19 @@ app.post("/confirm", function (req, res) {
     orderStatus: orderStatus,
   };
 
+  // let userNumber =
+  // getPhoneNumFromId(req.session.userId).then((rows) => {
+  //   let userPhoneNumber = rows.phone_num;
+  //   return userPhoneNumber;
+  // });
+
+  // message = {
+  //   to: userNumber
+  // };
+  // templateVars.message = message;
+
+  res.render("confirmation", templateVars);
+
   orderDb
     .addToOrderDb(
       orderId,
@@ -203,48 +210,49 @@ app.post("/confirm", function (req, res) {
     )
     .then((row) => console.log("incoming form db as response : ", row))
     .catch((e) => res.send(e));
-
-  console.log("in orders");
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  //first number is customer, second number is restaurant
-  const numbers = ["+19025805085", "+16473823731"];
-  const client = require("twilio")(accountSid, authToken);
-
-  numbers.forEach(async (number) => {
-    client.messages
-      .create({
-        body: `Thank you for your order of: ${nameAndQty}. Your total comes to ${orderTotal}. The restaurant will be notified of your special notes: ${orderNotes}. Delivery time will be updated shortly.`,
-        from: "+12055966681",
-        to: number,
-      })
-      .then((message) => {
-        templateVars.message = message;
-        res.render("confirmation", templateVars);
-      })
-      .catch((err) => console.log("error: ", err));
-  });
 });
+//   console.log("in orders");
+//   const accountSid = process.env.TWILIO_ACCOUNT_SID;
+//   const authToken = process.env.TWILIO_AUTH_TOKEN;
+//   //first number is customer, second number is restaurant
+//   const numbers = [];
+//   const client = require("twilio")(accountSid, authToken);
 
-const updateOrderTime = function (orderTime) {
-  app.get("/api/marks", (req, res) => {
-    console.log("order time ====", orderTime);
-    res.json({ orderDetails: orderTime });
-  });
-};
+//   numbers.forEach(async (number) => {
+//     client.messages
+//       .create({
+//         body: `Thank you for your order of: ${nameAndQty}. Your total comes to ${orderTotal}. The restaurant will be notified of your special notes: ${orderNotes}. Delivery time will be updated shortly.`,
+//         // number registered to twilio acct
+//         from: "",
+//         to: number,
+//       })
+//       .then((message) => {
+//         templateVars.message = message;
+//         res.render("confirmation", templateVars);
+//       })
+//       .catch((err) => console.log("error: ", err));
+//   });
+// });
 
-app.post("/sms", (req, res) => {
-  const twiml = new MessagingResponse();
-  console.log("in confirmation");
-  const orderTime = req.body.Body;
-  //sms response stored in req.body.Body
-  twiml.message(
-    `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${orderTime} minutes.`
-  );
-  updateOrderTime(orderTime);
-  res.writeHead(200, { "Content-Type": "text/xml" });
-  res.end(twiml.toString());
-});
+// const updateOrderTime = function (orderTime) {
+//   app.get("/api/marks", (req, res) => {
+//     console.log("order time ====", orderTime);
+//     res.json({ orderDetails: orderTime });
+//   });
+// };
+
+// app.post("/sms", (req, res) => {
+//   const twiml = new MessagingResponse();
+//   console.log("in confirmation");
+//   const orderTime = req.body.Body;
+//   //sms response stored in req.body.Body
+//   twiml.message(
+//     `Thank you for updating us. The customer has been notified that the estimated pickup time is in ${orderTime} minutes.`
+//   );
+//   updateOrderTime(orderTime);
+//   res.writeHead(200, { "Content-Type": "text/xml" });
+//   res.end(twiml.toString());
+// });
 
 // END OF TWILIO
 
@@ -252,15 +260,13 @@ app.post("/sms", (req, res) => {
 app.post("/login", (req, res) => {
   const user = req.body;
   // user.password = bcrypt.hashSync(user.password, 12);
-  console.log('user details : ',user);
+  // console.log('user details : ',user);
   verifyUserCreds
     .fetchUserDetails(user)
     .then((userId) => {
       if (!userId) {
-        res.send(`<html><body><div><p>Hi, You credentials doesn't match.
-      Unfortunately you can't have the right to move ahead on this.
-      </p>Please go back to your <a href="/login">login</a> page or click home
-      <a href="/">🏡</a> </div></body></html>\n`);
+        const templateVars = { error: "Incorrect email or password", userId: null};
+        res.render("login", templateVars);
         return;
       }
       req.session.userId = userId;
