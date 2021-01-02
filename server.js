@@ -31,9 +31,7 @@ db.connect();
 //psql database helper functions
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
-
 // const getUserFromEmail = require("./fetchUserFromEmail.js");
-
 const orderDb = require("./addOrderToDb.js");
 const updateOrderStatus = require("./updateOrderStatus.js");
 
