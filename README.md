@@ -3,7 +3,12 @@
 ## Mood4Food is Live! Check it out [here](https://mood4food-laurtann.herokuapp.com/)
 Text functionality not available on deployed version.
 
-A food ordering app (team project). After an order is placed, the restaurant & user are updated of order status via text message and preparation time is dynamically rendered on the confirmation page
+A food ordering app (team project). After an order is placed, the restaurant & user are updated of order status via text message and preparation time is dynamically rendered on the confirmation page.
+
+Users can create an account and log in and are tracked using a cookie. 
+
+Menu is rendered from a database, and orders are placed into a database upon order.
+
 Tech Stack: Twilio, Express, JS, EJS, PostgreSQL, Bootstrap & jQuery.
 
 ## Getting Started
