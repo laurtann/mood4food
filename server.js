@@ -1,8 +1,6 @@
 // load .env data into process.env
 require("dotenv").config();
 
-// hide the query in a textarea and populate w jQ then grab it
-
 // Web server config
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
