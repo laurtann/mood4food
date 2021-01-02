@@ -40,9 +40,9 @@ const orderDb = require("./addOrderToDb.js");
 const updateOrderStatus = require("./updateOrderStatus.js");
 
 //twilio config
-const http = require("http");
-const MessagingResponse = require("twilio").twiml.MessagingResponse;
-app.use(bodyParser.urlencoded({ extended: false }));
+// const http = require("http");
+// const MessagingResponse = require("twilio").twiml.MessagingResponse;
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 const getUser = require("./getPhoneNum.js");
 const { getPhoneNumFromId } = getUser(db);
