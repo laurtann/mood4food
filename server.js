@@ -26,7 +26,7 @@ const connectionString = 'postgres://jdugkihbcuuuzm:9214b930abbd3d9d1b85ee9d7bf6
 const db = new Pool({
   connectionString: connectionString
 })
-db.connect().then(() => console.log('db connected'));
+db.connect().then(() => console.log('db connected')).catch(error => console.log(error));
 
 //psql database helper functions
 const dbHelpers = require("./queryDatabase");
