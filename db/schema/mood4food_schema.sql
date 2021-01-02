@@ -22,6 +22,5 @@ CREATE TABLE orders(
   food_name_qty VARCHAR(255) NOT NULL,
   order_total VARCHAR(255) NOT NULL,
   order_notes VARCHAR(255) NOT NULL,
-  order_status VARCHAR(255) NOT NULL,
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );

@@ -16,13 +16,21 @@ const cookieSession = require("cookie-session");
 const bcrypt = require("bcrypt");
 
 // PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("./lib/db.js");
-const db = new Pool(dbParams);
-db.connect();
+// const { Pool } = require("pg");
+// const dbParams = require("./lib/db.js");
+// const db = new Pool(dbParams);
+// db.connect();
+
+//HEROKU
+const { Pool, Client } = require("pg");
+const connectionString = 'postgres://fswytujknzugxv:57c5b3e46a77a2e2dc24ad780ccee231e17114fc1f12ba629c92ad92c934faa8@ec2-52-203-49-58.compute-1.amazonaws.com:5432/d852pc5qpj5t3h';
+
+const db = new Pool({
+  connectionString: connectionString
+})
+db.connect().then(() => console.log('db connected'));
 
 //psql database helper functions
-
 const dbHelpers = require("./queryDatabase");
 const { getAllMenuItems } = dbHelpers(db);
 
@@ -66,17 +74,12 @@ app.use(
   })
 );
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const { promiseImpl } = require("ejs");
 
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
-// Note: mount other resources here, using the same pattern above
 
 //Generate random number (61-999)
 const generateRandomNumber = () => {
@@ -91,9 +94,6 @@ const getTime = () => {
   return datetime;
 };
 
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   getAllMenuItems().then((rows) => {
     let userId = req.session.userId;
@@ -104,7 +104,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// added for dev - move later
 app.get("/login", (req, res) => {
   let userId = req.session.userId;
   let userName = req.session.userName
@@ -115,7 +114,6 @@ app.get("/login", (req, res) => {
   }
 });
 
-// added for dev - move later
 app.get("/register", (req, res) => {
   let userId = req.session.userId;
   let userName = req.session.userName
@@ -136,9 +134,6 @@ app.post("/registration", (req, res) => {
     return;
   }
 
-
-  //check if user already exists
-// when user email id already exists in the system
   checkExistingEmailId
     .fetchEmailId(user.email)
     .then((email) => {
@@ -148,7 +143,6 @@ app.post("/registration", (req, res) => {
         return;
       }
     })
-
 
   //add complete details into db and work on the session
   user.password = bcrypt.hashSync(user.password, 12);
@@ -175,7 +169,6 @@ app.post("/confirm", function (req, res) {
   const foodArr = nameAndQty.split(",");
   const orderTotal = req.body.orderTotal;
   const userId = req.session.userId;
-  let orderStatus = "ip";
 
   const templateVars = {
     orderNotes: orderNotes,
@@ -183,7 +176,6 @@ app.post("/confirm", function (req, res) {
     foodArr: foodArr,
     orderTotal: orderTotal,
     userId: userId,
-    orderStatus: orderStatus,
   };
 
   // let userNumber =
@@ -205,13 +197,11 @@ app.post("/confirm", function (req, res) {
       nameAndQty,
       orderTotal,
       orderNotes,
-      orderStatus,
       userId
     )
     .then((row) => console.log("incoming form db as response : ", row))
     .catch((e) => res.send(e));
 });
-//   console.log("in orders");
 //   const accountSid = process.env.TWILIO_ACCOUNT_SID;
 //   const authToken = process.env.TWILIO_AUTH_TOKEN;
 //   //first number is customer, second number is restaurant
@@ -256,11 +246,8 @@ app.post("/confirm", function (req, res) {
 
 // END OF TWILIO
 
-//jpiotrowski0@jigsy.com --> password
 app.post("/login", (req, res) => {
   const user = req.body;
-  // user.password = bcrypt.hashSync(user.password, 12);
-  // console.log('user details : ',user);
   verifyUserCreds
     .fetchUserDetails(user)
     .then((userId) => {
