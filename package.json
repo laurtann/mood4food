@@ -1,6 +1,9 @@
 {
   "name": "node-skeleton",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.x"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -13,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/dotenv": "^8.2.0",
-    "bcrypt": "2.0.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "dotenv": "^2.0.0",
