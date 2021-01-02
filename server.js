@@ -14,19 +14,19 @@ const cookieSession = require("cookie-session");
 const bcrypt = require("bcrypt");
 
 // PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("./lib/db.js");
-const db = new Pool(dbParams);
-db.connect();
+// const { Pool } = require("pg");
+// const dbParams = require("./lib/db.js");
+// const db = new Pool(dbParams);
+// db.connect();
 
 //HEROKU
-// const { Pool, Client } = require("pg");
-// const connectionString = 'postgres://jdugkihbcuuuzm:9214b930abbd3d9d1b85ee9d7bf68f818ab9136d1885e9899f748d8d72da9a7a@ec2-52-203-49-58.compute-1.amazonaws.com:5432/dd93ouqviqv4og';
+const { Pool, Client } = require("pg");
+const connectionString = 'postgres://jdugkihbcuuuzm:9214b930abbd3d9d1b85ee9d7bf68f818ab9136d1885e9899f748d8d72da9a7a@ec2-52-203-49-58.compute-1.amazonaws.com:5432/dd93ouqviqv4og';
 
-// const db = new Pool({
-//   connectionString: connectionString
-// })
-// db.connect().then(() => console.log('db connected'));
+const db = new Pool({
+  connectionString: connectionString
+})
+db.connect().then(() => console.log('db connected'));
 
 //psql database helper functions
 const dbHelpers = require("./queryDatabase");
