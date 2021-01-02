@@ -13,13 +13,13 @@ const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const bcrypt = require("bcrypt");
 
-// PG database client/connection setup
+// PG database client/connection setup --- uncomment for local deploy
 // const { Pool } = require("pg");
 // const dbParams = require("./lib/db.js");
 // const db = new Pool(dbParams);
 // db.connect();
 
-//HEROKU
+//HEROKU -- comment for local deploy
 const pg = require("pg");
 pg.defaults.ssl = true;
 const connectionString = 'postgres://jdugkihbcuuuzm:9214b930abbd3d9d1b85ee9d7bf68f818ab9136d1885e9899f748d8d72da9a7a@ec2-52-203-49-58.compute-1.amazonaws.com:5432/dd93ouqviqv4og';
@@ -36,7 +36,7 @@ const { getAllMenuItems } = dbHelpers(db);
 const orderDb = require("./addOrderToDb.js");
 const updateOrderStatus = require("./updateOrderStatus.js");
 
-//twilio config
+//twilio config --- uncomment for twilio deploy
 // const http = require("http");
 // const MessagingResponse = require("twilio").twiml.MessagingResponse;
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -199,6 +199,8 @@ app.post("/confirm", function (req, res) {
     .then((row) => console.log("incoming form db as response : ", row))
     .catch((e) => res.send(e));
 });
+
+// --- uncomment for twilio deploy
 //   const accountSid = process.env.TWILIO_ACCOUNT_SID;
 //   const authToken = process.env.TWILIO_AUTH_TOKEN;
 //   //first number is customer, second number is restaurant
